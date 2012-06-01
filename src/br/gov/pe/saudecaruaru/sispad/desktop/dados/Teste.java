@@ -27,7 +27,7 @@ public class Teste {
          Competencia com= new Competencia();
          com.setAno("2012");
          com.setMes("02");
-        ReaderATIMUN r= new ReaderATIMUN(com);
+        ReaderATIMUN reader= new ReaderATIMUN(com);
 //        Medico med= new Medico();
 //        med.setServidor_cpf("09886798805");
 //        med.setUnidade_cnes("2345676");
@@ -43,36 +43,35 @@ public class Teste {
         try {
             //cria o usuário
            UsuarioDesktop user= new UsuarioDesktop();
-           user.setServidor_cpf("232132");
-           user.setToken("993eh2198e3yu2899");
-           user.setSerial_aplicacao("jndewhd936327");
+           user.setServidor_cpf("09809809809");
+           user.setToken("c425a748fe7269fa6c4202a77569df66b3609026");
+           user.setSerial_aplicacao("0987890");
            user.setUsuario_sistema("cesar");
+           MessageWebService[] mensagens2 =  servivoProcedimento.login(user);
+            for(MessageWebService msg: mensagens2){ 
+                System.out.println(msg.getMessage());
+           }
            //pega os procedimentos que devem ser enviados
            
-           Procedimento[] pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeMedicoAEnviarSIAB(user);
            Medico[] medi= servivoProcedimento.getMedicos(null, user);
            
            for(Procedimento p:pro){
                System.out.println(p.getNome());
            }
            
-           MedicoExecutaProcedimento[] array=r.getProcedimentosExecutadoMedico(medi, com, pro);
-//           
-////           for(MedicoExecutaProcedimento m: array){
-////               System.out.println(m.getMedico_cpf());
-////           }
-//           
+           MedicoExecutaProcedimento[] array=reader.getProcedimentosExecutadoMedico(medi, com, pro);
+           
+           for(MedicoExecutaProcedimento m: array){
+               System.out.println(m.getProcedimento_codigo());
+           }
+           
            MessageWebService[] mensagens;
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
-//           for(MessageWebService msg: mensagens){ 
-//                System.out.println(msg.getMessage());
-//           }
-//           
-//           Unidade[] pr=servivoProcedimento.getUnidades(user);
-//           for(Unidade p: pr){
-//               
-//               System.out.println(p.getNome());
-//           }
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
+
 //           Medico[] medi= servivoProcedimento.getMedicos(null, user);
 //           for(Medico p: medi){
 //               
@@ -85,7 +84,7 @@ public class Teste {
     }
      
      public void TesteAtimun(Competencia competencia){
-         ReaderATIMUN r= new ReaderATIMUN(competencia);
+        ReaderATIMUN r= new ReaderATIMUN(competencia);
         Medico med= new Medico();
         med.setServidor_cpf("09886798805");
         med.setUnidade_cnes("2345676");

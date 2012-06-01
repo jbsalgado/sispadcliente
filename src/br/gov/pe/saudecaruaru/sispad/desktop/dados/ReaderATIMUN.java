@@ -162,13 +162,11 @@ public class ReaderATIMUN implements IReaderATIMUN{
                     Connection conec=ConectionFactory.getConnection();
                     StringBuffer query=new StringBuffer();
                     //campos que devem ser selecionados, independente dos procedimentos a serem enviados
-                    query.append("SELECT "+ReaderATIMUN.CODIGO_UNIDADE_CNES+", ");
+                    query.append("SELECT "+ReaderATIMUN.CODIGO_UNIDADE_CNES+" ");
                     int s=procedimentos.length;
                     //campos que devem selecionados, cada campo corresponde a um procedimento
                     for(int i=0; i<s;i++){
-                        if(i!=0){
                         query.append(", ");
-                        }
                         //pega o campo que corresponde ao procedimento
                         query.append(this.getNameField(procedimentos[i].getCodigo()));
                     }

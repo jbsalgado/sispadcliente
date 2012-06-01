@@ -61,7 +61,7 @@ public class Siab implements ISistema{
          Competencia com= new Competencia();
          com.setAno("2012");
          com.setMes("02");
-        ReaderATIMUN r= new ReaderATIMUN(com);
+         ReaderATIMUN r= new ReaderATIMUN(com);
 //        Medico med= new Medico();
 //        med.setServidor_cpf("09886798805");
 //        med.setUnidade_cnes("2345676");
@@ -98,9 +98,9 @@ public class Siab implements ISistema{
 //           
            MessageWebService[] mensagens;
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
-//           for(MessageWebService msg: mensagens){ 
-//                System.out.println(msg.getMessage());
-//           }
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getTipo());
+           }
 //           
 //           Unidade[] pr=servivoProcedimento.getUnidades(user);
 //           for(Unidade p: pr){
