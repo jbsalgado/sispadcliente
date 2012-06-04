@@ -53,18 +53,15 @@ public class Teste {
            }
            //pega os procedimentos que devem ser enviados
            
-           Procedimento[] pro=servivoProcedimento.getProcedimentosDeMedicoAEnviarSIAB(user);
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
            Medico[] medi= servivoProcedimento.getMedicos(null, user);
            
            for(Procedimento p:pro){
-               System.out.println(p.getNome());
+               System.out.println(p.getCodigo());
            }
            
            MedicoExecutaProcedimento[] array=reader.getProcedimentosExecutadoMedico(medi, com, pro);
            
-           for(MedicoExecutaProcedimento m: array){
-               System.out.println(m.getProcedimento_codigo());
-           }
            
            MessageWebService[] mensagens;
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);

@@ -4,6 +4,10 @@
  */
 package br.gov.pe.saudecaruaru.sispad.desktop.gui;
 
+import br.gov.pe.saudecaruaru.sispad.desktop.controllers.UsuarioDesktopController;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Junior Pires
@@ -13,8 +17,23 @@ public class DadosUsuario extends javax.swing.JFrame {
     /**
      * Creates new form DadosUsuario
      */
+    UsuarioDesktopController usuarioDesktopController;
     public DadosUsuario() {
         initComponents();
+        usuarioDesktopController = new UsuarioDesktopController();
+        UsuarioDesktop usuarioDesktop = null;
+        usuarioDesktop = usuarioDesktopController.getUsuario();
+        if(usuarioDesktop!=null){
+            jTextFieldCpf.setText(usuarioDesktop.getServidor_cpf());
+            jTextFieldToken.setText(usuarioDesktop.getToken());
+            jTextFieldNome.setText(usuarioDesktop.getUsuario_sistema());
+            jTextFieldSerial.setText(usuarioDesktop.getSerial_aplicacao());
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Usuario não encontrado");
+        }
+       
+        
     }
 
     /**
@@ -51,6 +70,11 @@ public class DadosUsuario extends javax.swing.JFrame {
         jLabel5.setText("Serial da Aplicação: ");
 
         jButtonOK.setText("OK");
+        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,47 +130,22 @@ public class DadosUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
+            UsuarioDesktop usuarioDesktop = new UsuarioDesktop();
+            usuarioDesktop.setServidor_cpf(jTextFieldCpf.getText());
+            usuarioDesktop.setToken(jTextFieldToken.getText());
+            usuarioDesktop.setUsuario_sistema(jTextFieldNome.getText());
+            usuarioDesktop.setSerial_aplicacao(jTextFieldSerial.getText());
+            
+            usuarioDesktopController.atualizaUsuario(usuarioDesktop);
+            DadosUsuario.this.setVisible(false);
+            dispose();
+    }//GEN-LAST:event_jButtonOKActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /*
-         * Set the Nimbus look and feel
-         */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DadosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /*
-         * Create and display the form
-         */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new DadosUsuario().setVisible(true);
-            }
-        });
-    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonOK;
     private javax.swing.JLabel jLabel1;
