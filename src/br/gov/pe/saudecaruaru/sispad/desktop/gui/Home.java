@@ -5,13 +5,14 @@
 package br.gov.pe.saudecaruaru.sispad.desktop.gui;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IEnvioController;
+import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IUsuarioDesktopController;
+import br.gov.pe.saudecaruaru.sispad.desktop.controllers.UsuarioDesktopController;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -23,9 +24,20 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      */
     IEnvioController envioController = null;
-    public Home(IEnvioController envioController) {
+    IUsuarioDesktopController usuarioDesktopController = null;
+    public Home(IEnvioController envioController, IUsuarioDesktopController usuarioDesktopController) {
         initComponents();
         this.envioController = envioController;
+        this.usuarioDesktopController = usuarioDesktopController;
+      
+        //inicializa o usuario
+       MessageWebService[] menssagens =  this.usuarioDesktopController.login();
+        for(MessageWebService msg: menssagens){ 
+                System.out.println(msg.getMessage());
+                jLabelLogado.setText(msg.getMessage());
+           }
+        
+        logadoOn();
     }
 
     /**
@@ -47,6 +59,8 @@ public class Home extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jComboBoxMes = new javax.swing.JComboBox();
         jComboBoxAno = new javax.swing.JComboBox();
+        jToolBar1 = new javax.swing.JToolBar();
+        jLabelLogado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -85,6 +99,12 @@ public class Home extends javax.swing.JFrame {
 
         jComboBoxAno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
+        jToolBar1.setRollover(true);
+
+        jLabelLogado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png"))); // NOI18N
+        jLabelLogado.setText("OFF");
+        jToolBar1.add(jLabelLogado);
+
         jMenu1.setText("Usuário");
 
         jMenuItem1.setText("Dados");
@@ -107,7 +127,7 @@ public class Home extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addGroup(layout.createSequentialGroup()
@@ -118,21 +138,22 @@ public class Home extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBoxSistema, 0, 136, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldArq))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(122, Short.MAX_VALUE))
+                                .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBoxSistema, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldArq, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)))))
+                .addContainerGap(116, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jComboBoxSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -149,7 +170,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -192,6 +214,13 @@ public class Home extends javax.swing.JFrame {
        dadosUsuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    public void logadoOn(){
+        jLabelLogado.setIcon(new ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_on.png")));
+    }
+    
+    public void logadoOff(){
+        jLabelLogado.setIcon(new ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png")));
+    }
     /**
      * @param args the command line arguments
      */
@@ -243,10 +272,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelLogado;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JTextField jTextFieldArq;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

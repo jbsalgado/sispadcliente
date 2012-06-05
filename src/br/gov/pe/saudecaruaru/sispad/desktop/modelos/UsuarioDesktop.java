@@ -5,7 +5,14 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento;
+package br.gov.pe.saudecaruaru.sispad.desktop.modelos;
+
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortType;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortTypeProxy;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UsuarioDesktop  implements java.io.Serializable {
     private java.lang.String servidor_cpf;
@@ -15,21 +22,39 @@ public class UsuarioDesktop  implements java.io.Serializable {
     private java.lang.String usuario_sistema;
 
     private java.lang.String serial_aplicacao;
+    
+    private static UsuarioDesktop usuariouniqueInstance = null;
 
-    public UsuarioDesktop() {
+    private UsuarioDesktop() {
+    }
+    
+    //padrao Singleton implementado para prover um ponto de acesso global ao usuario
+    public static UsuarioDesktop getInstance(){
+        if(usuariouniqueInstance==null){
+            usuariouniqueInstance = new UsuarioDesktop();
+        }
+        return usuariouniqueInstance;
     }
 
-    public UsuarioDesktop(
-           java.lang.String servidor_cpf,
-           java.lang.String token,
-           java.lang.String usuario_sistema,
-           java.lang.String serial_aplicacao) {
-           this.servidor_cpf = servidor_cpf;
-           this.token = token;
-           this.usuario_sistema = usuario_sistema;
-           this.serial_aplicacao = serial_aplicacao;
+//    public UsuarioDesktop(
+//           java.lang.String servidor_cpf,
+//           java.lang.String token,
+//           java.lang.String usuario_sistema,
+//           java.lang.String serial_aplicacao) {
+//           this.servidor_cpf = servidor_cpf;
+//           this.token = token;
+//           this.usuario_sistema = usuario_sistema;
+//           this.serial_aplicacao = serial_aplicacao;
+//    }
+    public MessageWebService[] login(){
+        try {
+            ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
+            return servivoProcedimento.login(this);
+        } catch (RemoteException ex) {
+            Logger.getLogger(UsuarioDesktop.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
-
 
     /**
      * Gets the servidor_cpf value for this UsuarioDesktop.

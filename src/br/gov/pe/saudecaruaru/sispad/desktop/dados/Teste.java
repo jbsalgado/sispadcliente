@@ -13,7 +13,7 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortType;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortTypeProxy;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -41,8 +41,8 @@ public class Teste {
         ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
         
         try {
-            //cria o usuário
-           UsuarioDesktop user= new UsuarioDesktop();
+            //cria ou recupera uma instancia do usuario 
+           UsuarioDesktop user= UsuarioDesktop.getInstance();
            user.setServidor_cpf("09809809809");
            user.setToken("c425a748fe7269fa6c4202a77569df66b3609026");
            user.setSerial_aplicacao("0987890");
@@ -95,8 +95,7 @@ public class Teste {
         ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
         
         try {
-           UsuarioDesktop user= new UsuarioDesktop();
-           user.setServidor_cpf("232132");
+           UsuarioDesktop user=UsuarioDesktop.getInstance();
            user.setToken("993eh2198e3yu2899");
            user.setSerial_aplicacao("jndewhd936327");
            user.setUsuario_sistema("cesar");

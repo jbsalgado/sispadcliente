@@ -27,7 +27,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getLastMessages");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -38,7 +38,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("login");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -49,7 +49,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("logout");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -62,7 +62,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("getMedicos");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "codigoUnidade"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MedicoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Medico[].class);
@@ -73,7 +73,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosAEnviarSIAB");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -84,7 +84,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeMedicoAEnviarSIAB");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -95,7 +95,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeEnfermeiroAEnviarSIAB");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -106,7 +106,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeOdontologoAEnviarSIAB");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -117,7 +117,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeAgenteSaudeAEnviarSIAB");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -128,7 +128,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosAEnviarSIA");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -144,7 +144,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeMedicoAEnviarSIA");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -155,7 +155,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeEnfermeiroAEnviarSIA");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -166,7 +166,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeOdontologoAEnviarSIA");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -177,7 +177,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getProcedimentosDeAgenteSaudeAEnviarSIA");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ProcedimentoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[].class);
@@ -188,7 +188,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getUnidades");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UnidadeArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade[].class);
@@ -199,7 +199,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("validarUnidades");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "unidades"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UnidadeArray"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade[].class, false, false);
         oper.addParameter(param);
@@ -214,7 +214,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("getAgenteSaude");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "codigoUnidade"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "AgenteSaudeArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude[].class);
@@ -227,7 +227,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("getOdontologos");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "codigoUnidade"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "OdontologoArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Odontologo[].class);
@@ -240,7 +240,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("getEnfermeiros");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "codigoUnidade"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "EnfermeiroArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Enfermeiro[].class);
@@ -253,7 +253,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("sendExecutadosPorServidor");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "procedimentosExecutados"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "ServidorExecutaProcedimentoArray"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ServidorExecutaProcedimento[].class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -271,7 +271,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("sendExecutadosPorEquipe");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "procedimentosExecutados"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "EquipeExecutaProcedimentoArray"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EquipeExecutaProcedimento[].class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -284,7 +284,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("sendExecutadosPorMedico");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "procedimentosExecutados"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MedicoExecutaProcedimentoArray"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MedicoExecutaProcedimento[].class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -297,7 +297,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("sendExecutadosPorEnfermeiro");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "procedimentosExecutados"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "EnfermeiroExecutaProcedimentoArray"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EnfermeiroExecutaProcedimento[].class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -310,7 +310,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("sendExecutadosPorOdontologo");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "procedimentosExecutados"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "OdontologoExecutaProcedimentoArray"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.OdontologoExecutaProcedimento[].class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -323,7 +323,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         oper.setName("sendExecutadosPorAgenteSaude");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "procedimentosExecutados"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "AgenteSaudeExecutaProcedimentoArray"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaudeExecutaProcedimento[].class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "usuarioDesktop"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop"), br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "MessageWebServiceArray"));
         oper.setReturnClass(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[].class);
@@ -573,7 +573,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 
             qName = new javax.xml.namespace.QName("urn:ProcedimentoControllerwsdl", "UsuarioDesktop");
             cachedSerQNames.add(qName);
-            cls = br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop.class;
+            cls = br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -645,7 +645,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
         }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] getLastMessages(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] getLastMessages(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -676,7 +676,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] login(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] login(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -707,7 +707,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] logout(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] logout(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -738,7 +738,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Medico[] getMedicos(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Medico[] getMedicos(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -769,7 +769,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -800,7 +800,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeMedicoAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeMedicoAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -831,7 +831,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeEnfermeiroAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeEnfermeiroAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -862,7 +862,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeOdontologoAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeOdontologoAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -893,7 +893,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeAgenteSaudeAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeAgenteSaudeAEnviarSIAB(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -924,7 +924,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -955,7 +955,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeMedicoAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeMedicoAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -986,7 +986,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeEnfermeiroAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeEnfermeiroAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1017,7 +1017,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeOdontologoAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeOdontologoAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1048,7 +1048,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeAgenteSaudeAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento[] getProcedimentosDeAgenteSaudeAEnviarSIA(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1079,7 +1079,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade[] getUnidades(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade[] getUnidades(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1110,7 +1110,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] validarUnidades(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade[] unidades) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] validarUnidades(br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade[] unidades) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1141,7 +1141,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude[] getAgenteSaude(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude[] getAgenteSaude(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1172,7 +1172,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Odontologo[] getOdontologos(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Odontologo[] getOdontologos(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1203,7 +1203,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Enfermeiro[] getEnfermeiros(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Enfermeiro[] getEnfermeiros(java.lang.String codigoUnidade, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1234,7 +1234,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorServidor(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ServidorExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorServidor(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ServidorExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1265,7 +1265,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorEquipe(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EquipeExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorEquipe(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EquipeExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1296,7 +1296,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorMedico(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MedicoExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorMedico(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MedicoExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1327,7 +1327,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorEnfermeiro(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EnfermeiroExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorEnfermeiro(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EnfermeiroExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1358,7 +1358,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorOdontologo(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.OdontologoExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorOdontologo(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.OdontologoExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1389,7 +1389,7 @@ public class ProcedimentoControllerBindingStub extends org.apache.axis.client.St
 }
     }
 
-    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorAgenteSaude(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaudeExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
+    public br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService[] sendExecutadosPorAgenteSaude(br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaudeExecutaProcedimento[] procedimentosExecutados, br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop usuarioDesktop) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }

@@ -5,28 +5,43 @@
 package br.gov.pe.saudecaruaru.sispad.desktop.controllers;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.dados.UsuarioDesktopDao;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
 
 /**
  *
  * @author Junior Pires
  */
-public class UsuarioDesktopController {
+public class UsuarioDesktopController implements IUsuarioDesktopController{
     UsuarioDesktopDao usuarioDao;
+   
 
     public UsuarioDesktopController() {
         usuarioDao = new UsuarioDesktopDao();
+      
        
     }
     
     
     
-    public UsuarioDesktop getUsuario(){
-        return usuarioDao.getUsuario();
+    @Override
+    public void selectUsuario(){
+         usuarioDao.selectUsuario();
     }
     
+    @Override
     public void atualizaUsuario(UsuarioDesktop usuarioDesktop){
+        //atualiza usuario no banco
         usuarioDao.atualizaUsuario(usuarioDesktop);
+        //atualiza os dados do usuario atual
+        usuarioDao.selectUsuario();
+    }
+    
+    @Override
+    public MessageWebService[] login(){
+        selectUsuario();
+        UsuarioDesktop usuarioDesktop = UsuarioDesktop.getInstance();
+        return usuarioDesktop.login();
     }
     
 }

@@ -5,7 +5,7 @@
 package br.gov.pe.saudecaruaru.sispad.desktop.gui;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.UsuarioDesktopController;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,21 +17,20 @@ public class DadosUsuario extends javax.swing.JFrame {
     /**
      * Creates new form DadosUsuario
      */
+    UsuarioDesktop usuarioDesktop = null;
     UsuarioDesktopController usuarioDesktopController;
     public DadosUsuario() {
         initComponents();
         usuarioDesktopController = new UsuarioDesktopController();
-        UsuarioDesktop usuarioDesktop = null;
-        usuarioDesktop = usuarioDesktopController.getUsuario();
-        if(usuarioDesktop!=null){
+        
+        usuarioDesktopController.selectUsuario();
+        usuarioDesktop = UsuarioDesktop.getInstance();
             jTextFieldCpf.setText(usuarioDesktop.getServidor_cpf());
             jTextFieldToken.setText(usuarioDesktop.getToken());
             jTextFieldNome.setText(usuarioDesktop.getUsuario_sistema());
             jTextFieldSerial.setText(usuarioDesktop.getSerial_aplicacao());
             
-        }else{
-            JOptionPane.showMessageDialog(this, "Usuario não encontrado");
-        }
+        
        
         
     }
@@ -131,7 +130,7 @@ public class DadosUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-            UsuarioDesktop usuarioDesktop = new UsuarioDesktop();
+           
             usuarioDesktop.setServidor_cpf(jTextFieldCpf.getText());
             usuarioDesktop.setToken(jTextFieldToken.getText());
             usuarioDesktop.setUsuario_sistema(jTextFieldNome.getText());
@@ -139,7 +138,7 @@ public class DadosUsuario extends javax.swing.JFrame {
             
             usuarioDesktopController.atualizaUsuario(usuarioDesktop);
             DadosUsuario.this.setVisible(false);
-            dispose();
+            
     }//GEN-LAST:event_jButtonOKActionPerformed
 
     /**

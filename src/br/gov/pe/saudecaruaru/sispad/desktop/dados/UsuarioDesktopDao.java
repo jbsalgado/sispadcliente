@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package br.gov.pe.saudecaruaru.sispad.desktop.dados;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -101,7 +101,7 @@ public class UsuarioDesktopDao {
     * organizados em ordem decrescente de pontuação.
     * @return
     */
-    public UsuarioDesktop getUsuario() {
+    public void selectUsuario() {
    
     ResultSet rs;
     
@@ -112,9 +112,11 @@ public class UsuarioDesktopDao {
     Statement stm = conn.createStatement();
     rs = stm.executeQuery("SELECT * FROM usuario_desktop WHERE id='"+UsuarioDesktopDao.id+"'");
     if(rs.next()){
-        usuarioDesktop = new UsuarioDesktop(rs.getString("servidor_cpf"), rs.getString("token"),
-                                        rs.getString("usuario_sistema"), rs.getString("serial_aplicacao"));
-  
+        usuarioDesktop = UsuarioDesktop.getInstance();
+        usuarioDesktop.setServidor_cpf(rs.getString("servidor_cpf"));
+        usuarioDesktop.setToken(rs.getString("token"));
+        usuarioDesktop.setUsuario_sistema(rs.getString("usuario_sistema"));
+        usuarioDesktop.setSerial_aplicacao(rs.getString("serial_aplicacao"));         
     }
     rs.close();
     } catch (SQLException e) {
@@ -126,6 +128,6 @@ public class UsuarioDesktopDao {
                 Logger.getLogger(UsuarioDesktopDao.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-    return usuarioDesktop;
+  
     }
 }

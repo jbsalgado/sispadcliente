@@ -5,6 +5,7 @@
 
 package br.gov.pe.saudecaruaru.sispad.desktop.dados;
 
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.ISistema;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.*;
@@ -19,94 +20,41 @@ public class Siab implements ISistema{
 
     @Override
     public boolean lerEnviarDados(Competencia competencia) {
-        enviadoPorMedico();
-        //enviarDadosMedico(competencia);
+        enviarProcedimentosMedico(competencia);
        return true;
     }
 
-    public boolean enviarDadosMedico(Competencia competencia){
-        ReaderATIMUN r= new ReaderATIMUN(competencia);
-        Medico med= new Medico();
-        med.setServidor_cpf("09886798805");
-        med.setUnidade_cnes("2345676");
-        List<MedicoExecutaProcedimento> lista= r.getAll(med);
-        int size=lista.size();
-        MedicoExecutaProcedimento[] array= new MedicoExecutaProcedimento[size];
-        
-        for(int i=0;i<size;i++){
-            array[i]=lista.get(i);
-        }
-        ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
+    public boolean enviarProcedimentosMedico(Competencia competencia){
+        ReaderATIMUN reader= new ReaderATIMUN(competencia);
 
-        try {
-           UsuarioDesktop user= new UsuarioDesktop();
-           user.setServidor_cpf("232132");
-           user.setToken("993eh2198e3yu2899");
-           user.setSerial_aplicacao("jndewhd936327");
-           user.setUsuario_sistema("cesar");
-           MessageWebService[] mensagens;
-           mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
-           for(MessageWebService msg: mensagens){
-                System.out.println(msg.getMessage());
-           }
-           System.out.println("terminou");
-           return true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
-     }
-    
-    public void enviadoPorMedico(){
-         Competencia com= new Competencia();
-         com.setAno("2012");
-         com.setMes("02");
-         ReaderATIMUN r= new ReaderATIMUN(com);
-//        Medico med= new Medico();
-//        med.setServidor_cpf("09886798805");
-//        med.setUnidade_cnes("2345676");
-//        List<MedicoExecutaProcedimento> lista= r.getAll(med);
-//        int size=lista.size();
-//        MedicoExecutaProcedimento[] array= new MedicoExecutaProcedimento[size];
-//        
-//        for(int i=0;i<size;i++){
-//            array[i]=lista.get(i);
-//        }
         ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
         
         try {
-            //cria o usuário
-           UsuarioDesktop user= new UsuarioDesktop();
-           user.setServidor_cpf("232132");
-           user.setToken("993eh2198e3yu2899");
-           user.setSerial_aplicacao("jndewhd936327");
-           user.setUsuario_sistema("cesar");
+            //cria ou pega uma instancia de usuario
+           UsuarioDesktop user= UsuarioDesktop.getInstance();
+        
+//           MessageWebService[] mensagens2 =  servivoProcedimento.login(user);
+//            for(MessageWebService msg: mensagens2){ 
+//                System.out.println(msg.getMessage());
+//           }
            //pega os procedimentos que devem ser enviados
            
-           Procedimento[] pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeMedicoAEnviarSIAB(user);
            Medico[] medi= servivoProcedimento.getMedicos(null, user);
            
            for(Procedimento p:pro){
-               System.out.println(p.getNome());
+               System.out.println(p.getCodigo());
            }
            
-           MedicoExecutaProcedimento[] array=r.getProcedimentosExecutadoMedico(medi, com, pro);
-//           
-////           for(MedicoExecutaProcedimento m: array){
-////               System.out.println(m.getMedico_cpf());
-////           }
-//           
+           MedicoExecutaProcedimento[] array=reader.getProcedimentosExecutadoMedico(medi, competencia, pro);
+           
+           
            MessageWebService[] mensagens;
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
            for(MessageWebService msg: mensagens){ 
-                System.out.println(msg.getTipo());
+                System.out.println(msg.getMessage());
            }
-//           
-//           Unidade[] pr=servivoProcedimento.getUnidades(user);
-//           for(Unidade p: pr){
-//               
-//               System.out.println(p.getNome());
-//           }
+
 //           Medico[] medi= servivoProcedimento.getMedicos(null, user);
 //           for(Medico p: medi){
 //               
@@ -115,8 +63,10 @@ public class Siab implements ISistema{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return false;
+     }
     
-    }
+    
     }
 
 

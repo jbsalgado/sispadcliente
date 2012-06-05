@@ -12,7 +12,7 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebSer
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortType;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortTypeProxy;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ServidorExecutaProcedimento;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.UsuarioDesktop;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.ResultSet;
