@@ -43,11 +43,15 @@ public class Teste {
         try {
             //cria o usuário
            UsuarioDesktop user= new UsuarioDesktop();
-           user.setServidor_cpf("232132");
-           user.setToken("993eh2198e3yu2899");
-           user.setSerial_aplicacao("jndewhd936327");
-           user.setUsuario_sistema("cesar");
+           user.setServidor_cpf("09809809809");
+           user.setToken("744caa719a36dba1becbd0fcd71e3909b60b4e2a");
+           user.setSerial_aplicacao("testando");
+           user.setUsuario_sistema("ces");
            //pega os procedimentos que devem ser enviados
+           MessageWebService[] mensage=servivoProcedimento.login(user);
+           for(MessageWebService msg: mensage){ 
+                System.out.println(msg.getMessage());
+           }
            
            Procedimento[] pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
            Medico[] medi= servivoProcedimento.getMedicos(null, user);
