@@ -9,6 +9,8 @@ import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.ISistema;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,12 +21,15 @@ public class Siab implements ISistema{
    // private Competencia competencia;
 
     @Override
-    public boolean lerEnviarDados(Competencia competencia) {
-        enviarProcedimentosMedico(competencia);
-       return true;
+    public List<MessageWebService> lerEnviarDados(Competencia competencia) {
+        List<MessageWebService> listMensagens = new ArrayList<MessageWebService>();
+        listMensagens.addAll(enviarProcedimentosMedico(competencia));
+       
+        return listMensagens;
     }
 
-    public boolean enviarProcedimentosMedico(Competencia competencia){
+    public List<MessageWebService> enviarProcedimentosMedico(Competencia competencia){
+        MessageWebService[] mensagens = null;
         ReaderATIMUN reader= new ReaderATIMUN(competencia);
 
         ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
@@ -49,7 +54,7 @@ public class Siab implements ISistema{
            MedicoExecutaProcedimento[] array=reader.getProcedimentosExecutadoMedico(medi, competencia, pro);
            
            
-           MessageWebService[] mensagens;
+          
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
            for(MessageWebService msg: mensagens){ 
                 System.out.println(msg.getMessage());
@@ -63,7 +68,7 @@ public class Siab implements ISistema{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return false;
+        return Arrays.asList(mensagens);
      }
     
     

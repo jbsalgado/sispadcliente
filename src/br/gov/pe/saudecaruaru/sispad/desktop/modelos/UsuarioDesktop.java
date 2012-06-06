@@ -55,6 +55,16 @@ public class UsuarioDesktop  implements java.io.Serializable {
         }
         return null;
     }
+    
+     public MessageWebService[] logout(){
+        try {
+            ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
+            return servivoProcedimento.logout(this);
+        } catch (RemoteException ex) {
+            Logger.getLogger(UsuarioDesktop.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     /**
      * Gets the servidor_cpf value for this UsuarioDesktop.

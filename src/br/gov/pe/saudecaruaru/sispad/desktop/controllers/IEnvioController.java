@@ -5,13 +5,15 @@
 package br.gov.pe.saudecaruaru.sispad.desktop.controllers;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
+import java.util.List;
 
 /**
  *
  * @author Junior Pires
  */
 public interface IEnvioController {
-    public boolean EnviarDados(Envio envio);
+    public List<MessageWebService> EnviarDados(Envio envio);
    
     
     

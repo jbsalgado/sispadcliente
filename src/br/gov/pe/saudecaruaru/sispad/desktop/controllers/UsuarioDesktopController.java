@@ -5,6 +5,8 @@
 package br.gov.pe.saudecaruaru.sispad.desktop.controllers;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.dados.UsuarioDesktopDao;
+import br.gov.pe.saudecaruaru.sispad.desktop.gui.Home;
+import br.gov.pe.saudecaruaru.sispad.desktop.gui.IHome;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
 
@@ -15,9 +17,10 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebSer
 public class UsuarioDesktopController implements IUsuarioDesktopController{
     UsuarioDesktopDao usuarioDao;
    
-
-    public UsuarioDesktopController() {
+    IHome home = null;
+    public UsuarioDesktopController(IHome home) {
         usuarioDao = new UsuarioDesktopDao();
+        this.home = home;
       
        
     }
@@ -31,17 +34,50 @@ public class UsuarioDesktopController implements IUsuarioDesktopController{
     
     @Override
     public void atualizaUsuario(UsuarioDesktop usuarioDesktop){
+        //faz logout do usuario atual
+        logout();
         //atualiza usuario no banco
         usuarioDao.atualizaUsuario(usuarioDesktop);
-        //atualiza os dados do usuario atual
-        usuarioDao.selectUsuario();
+        //tenta fazer o login
+        login();
     }
     
     @Override
-    public MessageWebService[] login(){
+    public void login(){
+        //seleciona o usuario do banco
         selectUsuario();
+        //pega instanvia dele
         UsuarioDesktop usuarioDesktop = UsuarioDesktop.getInstance();
-        return usuarioDesktop.login();
+        //tenta fazer login
+        MessageWebService[] mensagens = usuarioDesktop.login();
+        
+        //exibe as imagens de erro na tela
+        for(MessageWebService msg: mensagens){
+          
+           if(msg.getTipo().equals("0") || msg.getTipo().equals("2")){
+               
+               home.disableButtonEscolher();
+               home.disableButtonEnviar();
+               home.logadoOff(msg.getMessage());
+             
+              
+           }else{
+               home.enableButtonEscolher();
+               home.enableButtonEnviar();
+               home.logadoOn(msg.getMessage());
+             
+           }
+             
+          }
+       
+    }
+    
+    @Override
+    public void logout(){
+        //pega instancia de um usuarioDesktop
+        UsuarioDesktop usuarioDesktop = UsuarioDesktop.getInstance();
+        //faz logout
+        usuarioDesktop.logout();
     }
     
 }

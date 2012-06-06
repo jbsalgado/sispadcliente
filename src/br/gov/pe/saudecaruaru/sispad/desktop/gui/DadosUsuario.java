@@ -4,6 +4,7 @@
  */
 package br.gov.pe.saudecaruaru.sispad.desktop.gui;
 
+import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IUsuarioDesktopController;
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.UsuarioDesktopController;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import javax.swing.JOptionPane;
@@ -18,10 +19,10 @@ public class DadosUsuario extends javax.swing.JFrame {
      * Creates new form DadosUsuario
      */
     UsuarioDesktop usuarioDesktop = null;
-    UsuarioDesktopController usuarioDesktopController;
-    public DadosUsuario() {
+    IUsuarioDesktopController usuarioDesktopController;
+    public DadosUsuario(IUsuarioDesktopController usuarioDesktopController) {
         initComponents();
-        usuarioDesktopController = new UsuarioDesktopController();
+        this.usuarioDesktopController = usuarioDesktopController;
         
         usuarioDesktopController.selectUsuario();
         usuarioDesktop = UsuarioDesktop.getInstance();

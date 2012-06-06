@@ -18,10 +18,10 @@ import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
 public class Main {
     public static void main(String[] argv){
         Envio envio = new Envio();
-        EnvioController envioController = new EnvioController(envio);
-        IUsuarioDesktopController usuarioDesktopController = new UsuarioDesktopController();
-        
-        Home home = new Home(envioController,usuarioDesktopController);
+//        EnvioController envioController = new EnvioController(envio);
+//        IUsuarioDesktopController usuarioDesktopController = new UsuarioDesktopController();
+//        
+        Home home = new Home(envio);
         home.setVisible(true);
         //IEnvioController envioController = new EnvioController(envio);
     }

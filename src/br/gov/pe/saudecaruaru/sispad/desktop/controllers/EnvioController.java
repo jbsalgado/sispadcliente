@@ -10,8 +10,10 @@ import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Configuracao;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.FactoryEnvioSistema;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.ISistema;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipException;
@@ -23,15 +25,16 @@ import java.util.zip.ZipException;
 public class EnvioController implements IEnvioController{
     Home home = null;
     Envio envio = null;
-    public EnvioController(Envio envio) {
-        this.envio = envio;
+    public EnvioController(Envio envio,Home home) {
         
+        this.envio = envio;
+        this.home=home;
         
     }
     
     //obtem os dados do modelo Envio, extrai os arquivos e ler e envia os dados
     @Override
-    public boolean EnviarDados(Envio envio){
+    public List<MessageWebService> EnviarDados(Envio envio){
       
         this.envio.setArquivo(envio.getArquivo());
         this.envio.setmesCompetencia(envio.getMesCompetencia());
@@ -39,21 +42,19 @@ public class EnvioController implements IEnvioController{
         this.envio.setSistema(envio.getSistema());
         
         if(this.envio.extrairArquivo())
-            if(lerEnviarDados()){
+            return lerEnviarDados();
                 //Configuracao.limpaDiretorioTemp();
-                return true;
-            }
-        return false;
+              
+            
+        return null;
     }
    
     //obtem o sistema a partir da fabrica e chama o metodo de leitura e envio de dados
-    public boolean lerEnviarDados() {
+    public List<MessageWebService> lerEnviarDados() {
         ISistema sistema;
         sistema = FactoryEnvioSistema.obterFactory(this.envio.getSistema());
-        if(sistema.lerEnviarDados(this.envio.getCompetencia()))
-            return true;
-
-        return false;
+        
+        return sistema.lerEnviarDados(this.envio.getCompetencia());
         
        
     }

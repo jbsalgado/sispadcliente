@@ -14,6 +14,7 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebSer
 public interface IUsuarioDesktopController {
      public void selectUsuario();
      public void atualizaUsuario(UsuarioDesktop usuarioDesktop);
-     public MessageWebService[] login();
+     public void login();
+     public void logout();
      
 }

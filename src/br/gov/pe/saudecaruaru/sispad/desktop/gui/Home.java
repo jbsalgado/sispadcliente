@@ -4,40 +4,39 @@
  */
 package br.gov.pe.saudecaruaru.sispad.desktop.gui;
 
+import br.gov.pe.saudecaruaru.sispad.desktop.controllers.EnvioController;
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IEnvioController;
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IUsuarioDesktopController;
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.UsuarioDesktopController;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.RetificarMessagesWebService;
+
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.*;
 
 /**
  *
  * @author Junior Pires
  */
-public class Home extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame implements IHome{
 
     /**
      * Creates new form Home
      */
     IEnvioController envioController = null;
     IUsuarioDesktopController usuarioDesktopController = null;
-    public Home(IEnvioController envioController, IUsuarioDesktopController usuarioDesktopController) {
+    public Home(Envio envio) {
         initComponents();
-        this.envioController = envioController;
-        this.usuarioDesktopController = usuarioDesktopController;
+        this.envioController = new EnvioController(envio,this);
+        this.usuarioDesktopController =new UsuarioDesktopController(this);
       
         //inicializa o usuario
-       MessageWebService[] menssagens =  this.usuarioDesktopController.login();
-        for(MessageWebService msg: menssagens){ 
-                System.out.println(msg.getMessage());
-                jLabelLogado.setText(msg.getMessage());
-           }
-        
-        logadoOn();
+        this.usuarioDesktopController.login();       
+       
     }
 
     /**
@@ -54,9 +53,9 @@ public class Home extends javax.swing.JFrame {
         jComboBoxSistema = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldArq = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonEscolher = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonEnviar = new javax.swing.JButton();
         jComboBoxMes = new javax.swing.JComboBox();
         jComboBoxAno = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
@@ -78,20 +77,20 @@ public class Home extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Arquivo (.ZIP): ");
 
-        jButton1.setText("escolher");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEscolher.setText("escolher");
+        jButtonEscolher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonEscolherActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Competência(mês/ano): ");
 
-        jButton2.setText("Enviar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonEnviarActionPerformed(evt);
             }
         });
 
@@ -129,7 +128,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonEnviar)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -146,7 +145,7 @@ public class Home extends javax.swing.JFrame {
                                     .addComponent(jComboBoxSistema, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jTextFieldArq, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))))
+                                .addComponent(jButtonEscolher)))))
                 .addContainerGap(116, Short.MAX_VALUE))
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -162,14 +161,14 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldArq, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonEscolher, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -177,7 +176,7 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonEscolherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEscolherActionPerformed
          int returnVal = fileChooser.showOpenDialog(this);
           if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
@@ -188,9 +187,9 @@ public class Home extends javax.swing.JFrame {
     } else {
         System.out.println("File access cancelled by user.");
     }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonEscolherActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
       File file = fileChooser.getSelectedFile();
       String sistema = jComboBoxSistema.getSelectedItem().toString();
       String mesCompetencia = jComboBoxMes.getSelectedItem().toString();
@@ -201,26 +200,54 @@ public class Home extends javax.swing.JFrame {
       envio.setmesCompetencia(mesCompetencia);
       envio.setAnoCompetencia(anoCompetencia);
       envio.setSistema(sistema);
-      
-      if(envioController.EnviarDados(envio)){
-         JOptionPane.showMessageDialog(null,"Dados Enviados!", null, JOptionPane.INFORMATION_MESSAGE);
+      List<MessageWebService> listMensagens = null;
+      listMensagens= envioController.EnviarDados(envio);
+      RetificarMessagesWebService retificador = new RetificarMessagesWebService(listMensagens); 
+      if(listMensagens==null){
+        JOptionPane.showMessageDialog(null,"Arquivo deve ser do tipo ZIP", null, JOptionPane.ERROR_MESSAGE);
       }else{
-          JOptionPane.showMessageDialog(null,"Arquivo deve ser do tipo ZIP", null, JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(null,retificador.toString(), null, JOptionPane.INFORMATION_MESSAGE);
       }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonEnviarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       DadosUsuario dadosUsuario = new DadosUsuario();
+       DadosUsuario dadosUsuario = new DadosUsuario(this.usuarioDesktopController);
        dadosUsuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    public void logadoOn(){
+    @Override
+    public void logadoOn(String msg){
         jLabelLogado.setIcon(new ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_on.png")));
+        jLabelLogado.setText(msg);
     }
     
-    public void logadoOff(){
+    @Override
+    public void logadoOff(String msg){
         jLabelLogado.setIcon(new ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png")));
+        jLabelLogado.setText(msg);
     }
+    
+    @Override
+    public void disableButtonEscolher(){
+        jButtonEscolher.setEnabled(false);
+    }
+    
+    @Override
+    public void enableButtonEscolher(){
+        jButtonEscolher.setEnabled(true);
+    }
+    
+    @Override
+    public void disableButtonEnviar(){
+        jButtonEnviar.setEnabled(false);
+    }
+    
+    @Override
+    public void enableButtonEnviar(){
+        jButtonEnviar.setEnabled(true);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -264,8 +291,8 @@ public class Home extends javax.swing.JFrame {
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser fileChooser;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonEnviar;
+    private javax.swing.JButton jButtonEscolher;
     private javax.swing.JComboBox jComboBoxAno;
     private javax.swing.JComboBox jComboBoxMes;
     private javax.swing.JComboBox jComboBoxSistema;
