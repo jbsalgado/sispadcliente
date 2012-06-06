@@ -53,7 +53,7 @@ public class Teste {
                 System.out.println(msg.getMessage());
            }
            
-           Procedimento[] pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeMedicoAEnviarSIAB(user);
            Medico[] medi= servivoProcedimento.getMedicos(null, user);
            
            for(Procedimento p:pro){
@@ -61,16 +61,16 @@ public class Teste {
            }
            
            MedicoExecutaProcedimento[] array=r.getProcedimentosExecutadoMedico(medi, com, pro);
-//           
-////           for(MedicoExecutaProcedimento m: array){
-////               System.out.println(m.getMedico_cpf());
-////           }
-//           
+           
+           for(MedicoExecutaProcedimento m: array){
+               System.out.println(m.getMedico_cpf());
+           }
+           
            MessageWebService[] mensagens;
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
-//           for(MessageWebService msg: mensagens){ 
-//                System.out.println(msg.getMessage());
-//           }
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
 //           
 //           Unidade[] pr=servivoProcedimento.getUnidades(user);
 //           for(Unidade p: pr){
