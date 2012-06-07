@@ -22,7 +22,7 @@ public class ProcedimentoControllerServiceLocator extends org.apache.axis.client
     }
 
     // Use to get a proxy class for ProcedimentoControllerPort
-    private java.lang.String ProcedimentoControllerPort_address = "http://localhost/sispad/index.php?r=procedimento/service&ws=1";
+    private java.lang.String ProcedimentoControllerPort_address = "http://www.saudecaruaru.pe.gov.br/sispad/index.php?r=procedimento/service&ws=1";
 
     public java.lang.String getProcedimentoControllerPortAddress() {
         return ProcedimentoControllerPort_address;
