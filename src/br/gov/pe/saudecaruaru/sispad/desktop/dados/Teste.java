@@ -52,8 +52,12 @@ public class Teste {
                 System.out.println(msg.getMessage());
            }
            //pega os procedimentos que devem ser enviados
+           MessageWebService[] mensage=servivoProcedimento.login(user);
+           for(MessageWebService msg: mensage){ 
+                System.out.println(msg.getMessage());
+           }
            
-           Procedimento[] pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeMedicoAEnviarSIAB(user);
            Medico[] medi= servivoProcedimento.getMedicos(null, user);
            
            for(Procedimento p:pro){
