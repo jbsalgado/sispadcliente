@@ -17,17 +17,21 @@ import java.util.List;
  *
  * @author Junior Pires
  */
-public class Siab implements ISistema{
+public class Siab implements ISistema,ISiab{
    // private Competencia competencia;
 
     @Override
     public List<MessageWebService> lerEnviarDados(Competencia competencia) {
         List<MessageWebService> listMensagens = new ArrayList<MessageWebService>();
         listMensagens.addAll(enviarProcedimentosMedico(competencia));
+//        listMensagens.addAll(enviarProcedimentosOdontologo(competencia));
+//        listMensagens.addAll(enviarProcedimentosEnfermeiro(competencia));
+//        listMensagens.addAll(enviarProcedimentosAgenteDeSaude(competencia));
        
         return listMensagens;
     }
 
+    @Override
     public List<MessageWebService> enviarProcedimentosMedico(Competencia competencia){
         MessageWebService[] mensagens = null;
         ReaderATIMUN reader= new ReaderATIMUN(competencia);
@@ -70,6 +74,21 @@ public class Siab implements ISistema{
         }
         return Arrays.asList(mensagens);
      }
+
+    @Override
+    public List<MessageWebService> enviarProcedimentosOdontologo(Competencia competencia) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<MessageWebService> enviarProcedimentosEnfermeiro(Competencia competencia) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<MessageWebService> enviarProcedimentosAgendeDeSaude(Competencia competencia) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
     
     }
