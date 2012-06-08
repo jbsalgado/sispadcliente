@@ -4,28 +4,20 @@
  */
 package br.gov.pe.saudecaruaru.sispad.desktop.dados;
 
-import br.gov.pe.saudecaruaru.sispad.desktop.modelos.ProcedimentoEstatico;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EquipeExecutaProcedimento;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Medico;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortType;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortTypeProxy;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ServidorExecutaProcedimento;
-import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
-import java.rmi.RemoteException;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaudeExecutaProcedimento;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  *SSA2- Consolidado de cada microarea (cada acs) - agente de saude. 1 registro para cada acs por mês
  * @author Albuquerque
  */
-public class ReaderSAUMUN {
+public class ReaderSAUMUN implements IReaderSAUMUN{
     
     public static final String CODIGO_AREA="COD_AREA";
     public static final String CODIGO_SEGMENTO="COD_SEG";
@@ -103,48 +95,152 @@ public class ReaderSAUMUN {
     public static final String NUMERO_INTERNACOES_COMPLICACOES_DIABETES="H_DIABETE";
     public static final String NUMERO_INTERNACOES_OUTRAS_CAUSAS="H_OUTCAU";
     
-    
-
-
-
-
     public static final String NUMERO_VISITAS="NVISITAS";
     
-    
-    public List<EquipeExecutaProcedimento> selectAllCompetencias(){
-        List<EquipeExecutaProcedimento> list= new ArrayList<EquipeExecutaProcedimento>();
-        try{
-            Connection co=ConectionFactory.getConnection();
-            String sql="SELECT "+ReaderSAUMUN.CODIGO_AREA+", "+ReaderSAUMUN.CODIGO_MICRO_AREA+","
-                    + ""+ReaderSAUMUN.CODIGO_UNIDADE_CNES+","+ReaderSAUMUN.MES+","+
-                    ReaderSAUMUN.NUMERO_VISITAS+" FROM ZSAU12 WHERE "+ReaderSAUMUN.MES+"='02' AND "+
-                    ReaderSAUMUN.CODIGO_AREA+"='0024' AND "+ReaderSAUMUN.CODIGO_UNIDADE_CNES+"='2345676' ";
-            Statement stmt=co.createStatement();
-            ResultSet resultSet=stmt.executeQuery(sql);
-            int cont=0;
-            while(resultSet.next())
-            {
-                EquipeExecutaProcedimento eqp= new EquipeExecutaProcedimento();
-                eqp.setCompetencia(Integer.parseInt(resultSet.getString(ReaderSAUMUN.MES)+"2012"));
-                eqp.setEquipe_codigo_area(resultSet.getInt(ReaderSAUMUN.CODIGO_AREA));
-                eqp.setEquipe_codigo_micro_area(Integer.parseInt(resultSet.getString(ReaderSAUMUN.CODIGO_MICRO_AREA)));
-                eqp.setProcedimento_codigo(ProcedimentoEstatico.VISITA_DOMICILIAR_POR_PROFISSIONAL_NIVEL_MEDIO);
-                eqp.setQuantidade(resultSet.getInt(ReaderSAUMUN.NUMERO_VISITAS));
-                eqp.setUnidade_cnes(resultSet.getString(ReaderSAUMUN.CODIGO_UNIDADE_CNES));
-                //adicioa na lista
-                cont++;
-                list.add(eqp);
-            }
-            System.out.println(cont);
-            resultSet.close();
-            co.close();
-        
-        }catch(Exception e){
-            e.printStackTrace();
+    public static String getTableName(){
+        return "SAUMUN";
+    }
+
+    @Override
+    public AgenteSaudeExecutaProcedimento[] getProcedimentosExecutadoAgenteSaude(AgenteSaude agenteSaude, Competencia competencia, Procedimento[] procedimentos) {
+        if(procedimentos!=null && agenteSaude!=null){
+                //cria um vetor com a quantidade procedimentos que devem ser enviados
+                AgenteSaudeExecutaProcedimento[] array= new  AgenteSaudeExecutaProcedimento[procedimentos.length];
+                try{
+                    Connection conec=ConectionFactory.getConnection();
+                    StringBuffer query=new StringBuffer();
+                    //campos que devem ser selecionados, independente dos procedimentos a serem enviados
+                    query.append("SELECT "+ReaderSAUMUN.CODIGO_MICRO_AREA+", "+ReaderSAUMUN.CODIGO_UNIDADE_CNES);
+                    int s=procedimentos.length;
+                    //campos que devem selecionados, cada campo corresponde a um procedimento
+                    for(int i=0; i<s;i++){
+                        query.append(", ");
+                        //pega o campo que corresponde ao procedimento
+                        query.append(this.getNameField(procedimentos[i].getCodigo()));
+                    }
+                    //monta a tabela
+                    query.append(" FROM "+ReaderSAUMUN.getTableName()+competencia.getAnoDoisDigitos());
+                    query.append("  WHERE "+ReaderSAUMUN.MES+"= ?");
+                    query.append("  AND  "+ReaderSAUMUN.CODIGO_UNIDADE_CNES+"= ?");
+                    query.append("  AND  "+ReaderSAUMUN.CODIGO_MICRO_AREA+"= ?");
+                    //parametriza a consulta
+                    PreparedStatement stmt= conec.prepareStatement(query.toString());
+                    //setta os parâmetros
+                    stmt.setString(1, competencia.getMes());
+                    stmt.setString(2, agenteSaude.getUnidade_cnes());
+                    String tmp=""+agenteSaude.getMicro_area();
+                    //verifica o tamanho da string
+                    stmt.setString(3, tmp.length()==1?"0"+tmp:tmp);
+                    //faz a consulta
+                    ResultSet result=stmt.executeQuery();
+                    int pos=0;
+                    //cada registro equivale a 
+                    while(result.next()){
+                            
+                            //vai pegar todos os procedimento que devem se enviados por enfermeiro
+                            for(Procedimento proce: procedimentos){
+                                //pega o enfermeiro da unidade
+                                AgenteSaudeExecutaProcedimento agenExec= new  AgenteSaudeExecutaProcedimento();
+                                agenExec.setCompetencia(competencia.toInt());
+                                agenExec.setAgente_saude_cpf(agenteSaude.getServidor_cpf());
+                                agenExec.setAgente_saude_micro_area(agenteSaude.getMicro_area());
+                                agenExec.setAgente_saude_unidade_cnes(agenteSaude.getUnidade_cnes());
+                                agenExec.setProcedimento_codigo(proce.getCodigo());
+                                //pega o campo da tabela que corresponde ao procedimento
+                                agenExec.setQuantidade(result.getInt(this.getNameField(proce.getCodigo())));
+                                //adiciona o procedimento executado pelo enfermeiro.
+                                array[pos]=agenExec;
+                                pos++;
+                            }
+                    }
+                    result.close();
+                    conec.close();
+                    return array;
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                finally{
+                
+                }
         }
-        finally{
-         return list;
+        return null;
+    }
+    @Override
+    public AgenteSaudeExecutaProcedimento[] getProcedimentosExecutadoAgenteSaude(AgenteSaude[] agenteSaude, Competencia competencia, Procedimento[] procedimentos) {
+        if(procedimentos!=null){
+                //cria um vetor com a quantidade procedimentos que devem ser enviados
+                AgenteSaudeExecutaProcedimento[] array= new  AgenteSaudeExecutaProcedimento[procedimentos.length*agenteSaude.length];
+                try{
+                    Connection conec=ConectionFactory.getConnection();
+                    StringBuffer query=new StringBuffer();
+                    //campos que devem ser selecionados, independente dos procedimentos a serem enviados
+                    query.append("SELECT "+ReaderSAUMUN.CODIGO_MICRO_AREA+", "+ReaderSAUMUN.CODIGO_UNIDADE_CNES);
+                    int s=procedimentos.length;
+                    //campos que devem selecionados, cada campo corresponde a um procedimento
+                    for(int i=0; i<s;i++){
+                        query.append(", ");
+                        //pega o campo que corresponde ao procedimento
+                        query.append(this.getNameField(procedimentos[i].getCodigo()));
+                    }
+                    //monta a tabela
+                    query.append(" FROM "+ReaderSAUMUN.getTableName()+competencia.getAnoDoisDigitos());
+                    query.append("  WHERE "+ReaderSAUMUN.MES+"= ?");
+                    //parametriza a consulta
+                    PreparedStatement stmt= conec.prepareStatement(query.toString());
+                    //setta os parâmetros
+                    stmt.setString(1, competencia.getMes());
+                    //faz a consulta
+                    ResultSet result=stmt.executeQuery();
+                    int pos=0;
+                    //cada registro equivale a 
+                    while(result.next()){
+                        AgenteSaude agente=this.getAgenteSaude(agenteSaude, result.getString(ReaderSAUMUN.CODIGO_UNIDADE_CNES), result.getInt(ReaderSAUMUN.CODIGO_MICRO_AREA));
+                        //existe um enfermeiro para a unidade, sennão vai pular para o próximo registro
+                        if(agente!=null){
+                            
+                            //vai pegar todos os procedimento que devem se enviados por enfermeiro
+                            for(Procedimento proce: procedimentos){
+                                //pega o enfermeiro da unidade
+                                AgenteSaudeExecutaProcedimento agenExec= new  AgenteSaudeExecutaProcedimento();
+                                agenExec.setCompetencia(competencia.toInt());
+                                agenExec.setAgente_saude_cpf(agente.getServidor_cpf());
+                                agenExec.setAgente_saude_micro_area(agente.getMicro_area());
+                                agenExec.setAgente_saude_unidade_cnes(agente.getUnidade_cnes());
+                                agenExec.setProcedimento_codigo(proce.getCodigo());
+                                //pega o campo da tabela que corresponde ao procedimento
+                                agenExec.setQuantidade(result.getInt(this.getNameField(proce.getCodigo())));
+                                //adiciona o procedimento executado pelo enfermeiro.
+                                array[pos]=agenExec;
+                                pos++;
+                            }
+                        }
+                    }
+                    result.close();
+                    conec.close();
+                    return array;
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                finally{
+                
+                }
         }
+        return null;
     }
     
+    public AgenteSaude getAgenteSaude(AgenteSaude[] agenteSaude, String cnes, int micro_area){
+        for(AgenteSaude ag:agenteSaude){
+            if(ag.getUnidade_cnes().equals(cnes) && ag.getMicro_area()==micro_area){
+                
+                return ag;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String getNameField(String codigoProcedimento) {
+        //o codigo do procedimento do SIAB é igual ao nome do campo na tabela que o contém
+        return codigoProcedimento;
+    }
 }

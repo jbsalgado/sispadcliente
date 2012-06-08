@@ -5,7 +5,6 @@
 package br.gov.pe.saudecaruaru.sispad.desktop.dados;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Enfermeiro;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EnfermeiroExecutaProcedimento;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Medico;
@@ -140,18 +139,183 @@ public class ReaderATIMUN implements IReaderATIMUN{
     }
 
     @Override
-    public MedicoExecutaProcedimento[] getProcedimentosExecutadoMedico(Medico medico, Competencia competencia, Unidade unidade, Procedimento[] procedimentos) {
-         return null;
+    public MedicoExecutaProcedimento[] getProcedimentosExecutadoMedico(Medico medico, Competencia competencia,  Procedimento[] procedimentos) {
+          if(procedimentos!=null){
+                //cria um vetor com a quantidade procedimentos que devem ser enviados
+                MedicoExecutaProcedimento[] array= new MedicoExecutaProcedimento[procedimentos.length];
+                try{
+                    Connection conec=ConectionFactory.getConnection();
+                    StringBuffer query=new StringBuffer();
+                    //campos que devem ser selecionados, independente dos procedimentos a serem enviados
+                    query.append("SELECT "+ReaderATIMUN.CODIGO_UNIDADE_CNES+" ");
+                    int s=procedimentos.length;
+                    //campos que devem selecionados, cada campo corresponde a um procedimento
+                    for(int i=0; i<s;i++){
+                        query.append(", ");
+                        //pega o campo que corresponde ao procedimento
+                        query.append(this.getNameField(procedimentos[i].getCodigo()));
+                    }
+                    //monta a tabela
+                    query.append(" FROM "+ReaderATIMUN.getTableName()+competencia.getAnoDoisDigitos());
+                    query.append("  WHERE "+ReaderATIMUN.MES+"= ?");
+                    query.append("  AND "+ReaderATIMUN.CODIGO_UNIDADE_CNES+"= ?");
+                    //parametriza a consulta
+                    PreparedStatement stmt= conec.prepareStatement(query.toString());
+                    //setta os parâmetros
+                    stmt.setString(1, competencia.getMes());
+                    stmt.setString(2, medico.getUnidade_cnes());
+                    //faz a consulta
+                    ResultSet result=stmt.executeQuery();
+                    int pos=0;
+                    //cada registro equivale a 
+                    while(result.next()){
+                            
+                            //vai pegar todos os procedimento que devem se enviados por medico
+                            for(Procedimento proce: procedimentos){
+                                //pega o medico da unidade
+                                MedicoExecutaProcedimento medExec= new MedicoExecutaProcedimento();
+                                medExec.setCompetencia(competencia.toInt());
+                                medExec.setMedico_cpf(medico.getServidor_cpf());
+                                medExec.setMedico_unidade_cnes(medico.getUnidade_cnes());
+                                medExec.setProcedimento_codigo(proce.getCodigo());
+                                //pega o campo da tabela que corresponde ao procedimento
+                                medExec.setQuantidade(result.getInt(this.getNameField(proce.getCodigo())));
+                                //adiciona o procedimento executado pelo medico.
+                                array[pos]=medExec;
+                                pos++;
+                            }
+                    }
+                    result.close();
+                    conec.close();
+                    return array;
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                finally{
+                
+                }
+        }
+        return null;
     }
 
     @Override
-    public EnfermeiroExecutaProcedimento[] getProcedimentosExecutadoEnfermeiro(Enfermeiro enfermeiro, Competencia competencia, Unidade unidade, Procedimento[] procedimentos) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public EnfermeiroExecutaProcedimento[] getProcedimentosExecutadoEnfermeiro(Enfermeiro enfermeiro, Competencia competencia,  Procedimento[] procedimentos) {
+        if(procedimentos!=null && enfermeiro!=null){
+                //cria um vetor com a quantidade procedimentos que devem ser enviados
+                EnfermeiroExecutaProcedimento[] array= new EnfermeiroExecutaProcedimento[procedimentos.length];
+                try{
+                    Connection conec=ConectionFactory.getConnection();
+                    StringBuffer query=new StringBuffer();
+                    //campos que devem ser selecionados, independente dos procedimentos a serem enviados
+                    query.append("SELECT  ");
+                    int s=procedimentos.length;
+                    //campos que devem selecionados, cada campo corresponde a um procedimento
+                    for(int i=0; i<s;i++){
+                        query.append(", ");
+                        //pega o campo que corresponde ao procedimento
+                        query.append(this.getNameField(procedimentos[i].getCodigo()));
+                    }
+                    //monta a tabela
+                    query.append(" FROM "+ReaderATIMUN.getTableName()+competencia.getAnoDoisDigitos());
+                    query.append("  WHERE "+ReaderATIMUN.MES+"= ?");
+                    query.append("  AND "+ReaderATIMUN.CODIGO_UNIDADE_CNES+"= ?");
+                    //parametriza a consulta
+                    PreparedStatement stmt= conec.prepareStatement(query.toString());
+                    //setta os parâmetros
+                    stmt.setString(1, competencia.getMes());
+                    stmt.setString(2, enfermeiro.getUnidade_cnes());
+                    //faz a consulta
+                    ResultSet result=stmt.executeQuery();
+                    int pos=0;
+                    //cada registro equivale a 
+                    while(result.next()){
+                            
+                            //vai pegar todos os procedimento que devem se enviados por enfermeiro
+                            for(Procedimento proce: procedimentos){
+                                //pega o enfermeiro da unidade
+                                EnfermeiroExecutaProcedimento enfExec= new EnfermeiroExecutaProcedimento();
+                                enfExec.setCompetencia(competencia.toInt());
+                                enfExec.setEnfermeiro_cpf(enfermeiro.getServidor_cpf());
+                                enfExec.setEnfermeiro_unidade_cnes(enfermeiro.getUnidade_cnes());
+                                enfExec.setProcedimento_codigo(proce.getCodigo());
+                                //pega o campo da tabela que corresponde ao procedimento
+                                enfExec.setQuantidade(result.getInt(this.getNameField(proce.getCodigo())));
+                                //adiciona o procedimento executado pelo enfermeiro.
+                                array[pos]=enfExec;
+                                pos++;
+                            }
+                    }
+                    result.close();
+                    conec.close();
+                    return array;
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                finally{
+                
+                }
+        }
+        return null;
     }
 
     @Override
-    public OdontologoExecutaProcedimento[] getProcedimentosExecutadoOdontologo(Odontologo odontologo, Competencia competencia, Unidade unidade, Procedimento[] procedimentos) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public OdontologoExecutaProcedimento[] getProcedimentosExecutadoOdontologo(Odontologo odontologo, Competencia competencia,  Procedimento[] procedimentos) {
+        if(procedimentos!=null && odontologo!=null){
+                //cria um vetor com a quantidade procedimentos que devem ser enviados
+                OdontologoExecutaProcedimento[] array= new  OdontologoExecutaProcedimento[procedimentos.length];
+                try{
+                    Connection conec=ConectionFactory.getConnection();
+                    StringBuffer query=new StringBuffer();
+                    //campos que devem ser selecionados, independente dos procedimentos a serem enviados
+                    query.append("SELECT "+ReaderATIMUN.CODIGO_UNIDADE_CNES+" ");
+                    int s=procedimentos.length;
+                    //campos que devem selecionados, cada campo corresponde a um procedimento
+                    for(int i=0; i<s;i++){
+                        query.append(", ");
+                        //pega o campo que corresponde ao procedimento
+                        query.append(this.getNameField(procedimentos[i].getCodigo()));
+                    }
+                    //monta a tabela
+                    query.append(" FROM "+ReaderATIMUN.getTableName()+competencia.getAnoDoisDigitos());
+                    query.append("  WHERE "+ReaderATIMUN.MES+"= ?");
+                    query.append("  AND "+ReaderATIMUN.CODIGO_UNIDADE_CNES+"= ?");
+                    //parametriza a consulta
+                    PreparedStatement stmt= conec.prepareStatement(query.toString());
+                    //setta os parâmetros
+                    stmt.setString(1, competencia.getMes());
+                    stmt.setString(2, odontologo.getUnidade_cnes());
+                    //faz a consulta
+                    ResultSet result=stmt.executeQuery();
+                    int pos=0;
+                    //cada registro equivale a 
+                    while(result.next()){
+                            
+                            //vai pegar todos os procedimento que devem se enviados por enfermeiro
+                            for(Procedimento proce: procedimentos){
+                                //pega o enfermeiro da unidade
+                                OdontologoExecutaProcedimento odonExec= new  OdontologoExecutaProcedimento();
+                                odonExec.setCompetencia(competencia.toInt());
+                                odonExec.setOdontologo_cpf(odontologo.getServidor_cpf());
+                                odonExec.setOdontologo_unidade_cnes(odontologo.getUnidade_cnes());
+                                odonExec.setProcedimento_codigo(proce.getCodigo());
+                                //pega o campo da tabela que corresponde ao procedimento
+                                odonExec.setQuantidade(result.getInt(this.getNameField(proce.getCodigo())));
+                                //adiciona o procedimento executado pelo enfermeiro.
+                                array[pos]=odonExec;
+                                pos++;
+                            }
+                    }
+                    result.close();
+                    conec.close();
+                    return array;
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                finally{
+                
+                }
+        }
+        return null;
     }
 
     @Override
@@ -340,7 +504,8 @@ public class ReaderATIMUN implements IReaderATIMUN{
         return null;
     }
     
-    private String getNameField(String codigoProcedimento){
+    @Override
+    public  String getNameField(String codigoProcedimento){
         //o codigo do procedimento do siab é igual ao nome do campo em suas tabelas
         return codigoProcedimento;
     }
@@ -375,13 +540,5 @@ public class ReaderATIMUN implements IReaderATIMUN{
         return null;
     }
     
-    private AgenteSaude getAgenteSaude(AgenteSaude[] agenteSaude, String cnes){
-        for(AgenteSaude ag:agenteSaude){
-            if(ag.getUnidade_cnes().equals(cnes)){
-                
-                return ag;
-            }
-        }
-        return null;
-    }
+    
 }
