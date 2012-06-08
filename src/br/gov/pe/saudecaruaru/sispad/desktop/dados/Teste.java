@@ -14,6 +14,11 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoC
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortTypeProxy;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Enfermeiro;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EnfermeiroExecutaProcedimento;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Odontologo;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.OdontologoExecutaProcedimento;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -56,22 +61,61 @@ public class Teste {
            for(MessageWebService msg: mensage){ 
                 System.out.println(msg.getMessage());
            }
-           
+           //medicos
            Procedimento[] pro=servivoProcedimento.getProcedimentosDeMedicoAEnviarSIAB(user);
            Medico[] medi= servivoProcedimento.getMedicos(null, user);
            
            for(Procedimento p:pro){
-               System.out.println(p.getCodigo());
+               System.out.println("MED: "+p.getCodigo());
            }
            
            MedicoExecutaProcedimento[] array=reader.getProcedimentosExecutadoMedico(medi, com, pro);
-           
-           
            MessageWebService[] mensagens;
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
            for(MessageWebService msg: mensagens){ 
                 System.out.println(msg.getMessage());
            }
+           //odontologos
+//           pro=servivoProcedimento.getProcedimentosDeOdontologoAEnviarSIAB(user);
+//           Odontologo[] odon= servivoProcedimento.getOdontologos(null, user);
+//           
+//           for(Procedimento p:pro){
+//               System.out.println("ODON: "+p.getCodigo());
+//           }
+//           
+//           OdontologoExecutaProcedimento[] arr=reader.getProcedimentosExecutadoOdontologo(odon, com, pro);
+//           
+//           mensagens=servivoProcedimento.sendExecutadosPorOdontologo(arr, user);
+//           for(MessageWebService msg: mensagens){ 
+//                System.out.println(msg.getMessage());
+//           }
+           
+           //enfermeiros
+           pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
+           Enfermeiro[] enfer= servivoProcedimento.getEnfermeiros(null, user);
+           
+           for(Enfermeiro en: enfer){
+               System.out.println("ENFERmeiro: "+en.getServidor_cpf());
+           }
+           EnfermeiroExecutaProcedimento[] ar=reader.getProcedimentosExecutadoEnfermeiro(enfer, com, pro);
+           for(Procedimento p:pro){
+               System.out.println("ENFER: "+p.getCodigo());
+           }
+           mensagens=servivoProcedimento.sendExecutadosPorEnfermeiro(ar, user);
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
+           //agenteSaude
+//           pro=servivoProcedimento.getProcedimentosDeAgenteSaudeAEnviarSIAB(user);
+//           
+//           AgenteSaude[] agt= servivoProcedimento.getAgenteSaude(null, user);
+//           
+//           for(Procedimento p:pro){
+//               System.out.println("AGENTE: "+p.getCodigo());
+//           }
+//           
+//           AgenteSaudeExecutaProcedimento[] array=reader.getProcedimentosExecutado(medi, com, pro);
+           
 
 //           Medico[] medi= servivoProcedimento.getMedicos(null, user);
 //           for(Medico p: medi){
