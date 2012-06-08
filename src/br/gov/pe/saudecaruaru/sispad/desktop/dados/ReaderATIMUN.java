@@ -95,27 +95,25 @@ public class ReaderATIMUN implements IReaderATIMUN{
     public static final String NUMERO_VISITAS_DOMICILIARES_PROF_NIVEL_SUPERIOR="AP_PRONS";
     public static final String NUMERO_VISITAS_DOMICILIARES_PROF_NIVEL_MEDIO="AP_PRONM";
     
-    private Competencia competencia;
+  
     public ReaderATIMUN(){
     
     }
     
-    public ReaderATIMUN(Competencia competencia){
-        this.competencia = competencia;
-    }
+   
+    
+    
     public static String getTableName(){
         return "ATIMUN";
     }
     
-    public  String NameTable2(){
-        return "ATIMUN"+competencia.getAnoDoisDigitos();
-    }
+   
     
-    public List<MedicoExecutaProcedimento> getAll(Medico med){
+    public List<MedicoExecutaProcedimento> getAll(Medico med,Competencia competencia){
         List<MedicoExecutaProcedimento> lista= new ArrayList<MedicoExecutaProcedimento>();
         try{
             Connection co=ConectionFactory.getConnection();
-            String sql="SELECT * FROM "+this.NameTable2()+" WHERE "+ReaderSAUMUN.MES+"='"+competencia.getMes()+"' AND "+
+            String sql="SELECT * FROM "+ReaderATIMUN.getTableName()+competencia.getAnoDoisDigitos()+" WHERE "+ReaderSAUMUN.MES+"='"+competencia.getMes()+"' AND "+
                     ReaderSAUMUN.CODIGO_UNIDADE_CNES+"='"+med.getUnidade_cnes()+"'";
             Statement stmt=co.createStatement();
             ResultSet result=stmt.executeQuery(sql);
@@ -358,7 +356,7 @@ public class ReaderATIMUN implements IReaderATIMUN{
     private Enfermeiro getEnfermeiro(Enfermeiro[] enfermeiros, String cnes){
         for(Enfermeiro m:enfermeiros){
             if(m.getUnidade_cnes().equals(cnes)){
-                
+                System.out.println(m.getUnidade_cnes()+"="+cnes);
                 return m;
             }
         }
@@ -384,4 +382,9 @@ public class ReaderATIMUN implements IReaderATIMUN{
         }
         return null;
     }
+
+    /**
+     * @return the competencia
+     */
+   
 }

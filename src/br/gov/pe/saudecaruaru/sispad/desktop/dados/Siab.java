@@ -5,9 +5,9 @@
 
 package br.gov.pe.saudecaruaru.sispad.desktop.dados;
 
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.ISistema;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
-import br.gov.pe.saudecaruaru.sispad.desktop.modelos.ISistema;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,15 +18,23 @@ import java.util.List;
  * @author Junior Pires
  */
 public class Siab implements ISistema,ISiab{
+     IReaderATIMUN reader = null;
+     UsuarioDesktop user=null;
+    public Siab() {
+        reader = new ReaderATIMUN();
+        user = UsuarioDesktop.getInstance();
+    }
    // private Competencia competencia;
+    
+    
 
     @Override
     public List<MessageWebService> lerEnviarDados(Competencia competencia) {
         List<MessageWebService> listMensagens = new ArrayList<MessageWebService>();
         listMensagens.addAll(enviarProcedimentosMedico(competencia));
-//        listMensagens.addAll(enviarProcedimentosOdontologo(competencia));
-//        listMensagens.addAll(enviarProcedimentosEnfermeiro(competencia));
-//        listMensagens.addAll(enviarProcedimentosAgenteDeSaude(competencia));
+        listMensagens.addAll(enviarProcedimentosOdontologo(competencia));
+        listMensagens.addAll(enviarProcedimentosEnfermeiro(competencia));
+//        listMensagens.addAll(enviarProcedimentosAgenteDeSaude( competencia));
        
         return listMensagens;
     }
@@ -34,13 +42,11 @@ public class Siab implements ISistema,ISiab{
     @Override
     public List<MessageWebService> enviarProcedimentosMedico(Competencia competencia){
         MessageWebService[] mensagens = null;
-        ReaderATIMUN reader= new ReaderATIMUN(competencia);
+       
 
         ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
         
         try {
-            //cria ou pega uma instancia de usuario
-           UsuarioDesktop user= UsuarioDesktop.getInstance();
         
 //           MessageWebService[] mensagens2 =  servivoProcedimento.login(user);
 //            for(MessageWebService msg: mensagens2){ 
@@ -60,6 +66,7 @@ public class Siab implements ISistema,ISiab{
            
           
            mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
+           System.out.print("TAMANHO MEDICO "+mensagens.length);
            for(MessageWebService msg: mensagens){ 
                 System.out.println(msg.getMessage());
            }
@@ -77,12 +84,90 @@ public class Siab implements ISistema,ISiab{
 
     @Override
     public List<MessageWebService> enviarProcedimentosOdontologo(Competencia competencia) {
-        throw new UnsupportedOperationException("Not supported yet.");
+         MessageWebService[] mensagens = null;
+       
+
+        ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
+        
+        try {
+            //cria ou pega uma instancia de usuario
+           
+        
+//           MessageWebService[] mensagens2 =  servivoProcedimento.login(user);
+//            for(MessageWebService msg: mensagens2){ 
+//                System.out.println(msg.getMessage());
+//           }
+           //pega os procedimentos que devem ser enviados
+           
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeOdontologoAEnviarSIAB(user);
+           Odontologo[] odont= servivoProcedimento.getOdontologos(null, user);
+           
+           for(Procedimento p:pro){
+               System.out.println(p.getCodigo());
+           }
+           
+           OdontologoExecutaProcedimento[] array=reader.getProcedimentosExecutadoOdontologo(odont,competencia, pro);
+           
+           
+          
+           mensagens=servivoProcedimento.sendExecutadosPorOdontologo(array, user);
+           System.out.print("TAMANHO ODONTOLOGO "+mensagens.length);
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
+
+//           Medico[] medi= servivoProcedimento.getMedicos(null, user);
+//           for(Medico p: medi){
+//               
+//               System.out.println(p.getUnidade_cnes());
+//           }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(mensagens);
     }
 
     @Override
     public List<MessageWebService> enviarProcedimentosEnfermeiro(Competencia competencia) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        MessageWebService[] mensagens = null;
+       
+
+        ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
+        
+        try {
+        
+//           MessageWebService[] mensagens2 =  servivoProcedimento.login(user);
+//            for(MessageWebService msg: mensagens2){ 
+//                System.out.println(msg.getMessage());
+//           }
+           //pega os procedimentos que devem ser enviados
+           
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
+           Enfermeiro[] enfer= servivoProcedimento.getEnfermeiros(null, user);
+           
+           for(Procedimento p:pro){
+               System.out.println(p.getCodigo());
+           }
+           
+           EnfermeiroExecutaProcedimento[] array=reader.getProcedimentosExecutadoEnfermeiro(enfer,competencia, pro);
+           System.out.print("VETOR  "+array.length);
+           
+          
+           mensagens=servivoProcedimento.sendExecutadosPorEnfermeiro(array, user);
+           System.out.print("TAMANHO ENFERMEIRO "+mensagens.length);
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
+
+//           Medico[] medi= servivoProcedimento.getMedicos(null, user);
+//           for(Medico p: medi){
+//               
+//               System.out.println(p.getUnidade_cnes());
+//           }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(mensagens);
     }
 
     @Override

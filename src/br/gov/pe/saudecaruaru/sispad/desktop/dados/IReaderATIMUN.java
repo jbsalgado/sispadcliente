@@ -49,4 +49,6 @@ public interface IReaderATIMUN {
     
     public OdontologoExecutaProcedimento[] getProcedimentosExecutadoOdontologo(Odontologo[] odontologo, Competencia competencia, Procedimento[] procedimentos);
     
+    
+
 }
