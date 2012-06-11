@@ -461,7 +461,7 @@ public class ReaderATIMUN implements IReaderATIMUN{
                     }
                     //monta a tabela
                     query.append(" FROM "+ReaderATIMUN.getTableName()+competencia.getAnoDoisDigitos());
-                    query.append("  WHERE "+ReaderATIMUN.MES+"= ?");
+                    query.append("  WHERE "+ReaderATIMUN.MES+"=?");
                     //parametriza a consulta
                     PreparedStatement stmt= conec.prepareStatement(query.toString());
                     //setta os parâmetros

@@ -15,6 +15,7 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoC
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude;
+import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaudeExecutaProcedimento;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Enfermeiro;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EnfermeiroExecutaProcedimento;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Odontologo;
@@ -76,19 +77,19 @@ public class Teste {
                 System.out.println(msg.getMessage());
            }
            //odontologos
-//           pro=servivoProcedimento.getProcedimentosDeOdontologoAEnviarSIAB(user);
-//           Odontologo[] odon= servivoProcedimento.getOdontologos(null, user);
-//           
-//           for(Procedimento p:pro){
-//               System.out.println("ODON: "+p.getCodigo());
-//           }
-//           
-//           OdontologoExecutaProcedimento[] arr=reader.getProcedimentosExecutadoOdontologo(odon, com, pro);
-//           
-//           mensagens=servivoProcedimento.sendExecutadosPorOdontologo(arr, user);
-//           for(MessageWebService msg: mensagens){ 
-//                System.out.println(msg.getMessage());
-//           }
+           pro=servivoProcedimento.getProcedimentosDeOdontologoAEnviarSIAB(user);
+           Odontologo[] odon= servivoProcedimento.getOdontologos(null, user);
+           
+           for(Procedimento p:pro){
+               System.out.println("ODON: "+p.getCodigo());
+           }
+           
+           OdontologoExecutaProcedimento[] arr=reader.getProcedimentosExecutadoOdontologo(odon, com, pro);
+           
+           mensagens=servivoProcedimento.sendExecutadosPorOdontologo(arr, user);
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
            
            //enfermeiros
            pro=servivoProcedimento.getProcedimentosDeEnfermeiroAEnviarSIAB(user);
@@ -106,15 +107,23 @@ public class Teste {
                 System.out.println(msg.getMessage());
            }
            //agenteSaude
-//           pro=servivoProcedimento.getProcedimentosDeAgenteSaudeAEnviarSIAB(user);
-//           
-//           AgenteSaude[] agt= servivoProcedimento.getAgenteSaude(null, user);
-//           
-//           for(Procedimento p:pro){
-//               System.out.println("AGENTE: "+p.getCodigo());
-//           }
-//           
-//           AgenteSaudeExecutaProcedimento[] array=reader.getProcedimentosExecutado(medi, com, pro);
+           pro=servivoProcedimento.getProcedimentosDeAgenteSaudeAEnviarSIAB(user);
+           
+           AgenteSaude[] agt= servivoProcedimento.getAgenteSaude(null, user);
+           
+           for(Procedimento p:pro){
+               System.out.println("AGENTE: "+p.getCodigo());
+           }
+           IReaderSAUMUN re2=new ReaderSAUMUN();
+           
+           AgenteSaudeExecutaProcedimento[] vet=re2.getProcedimentosExecutadoAgenteSaude(agt, com, pro);
+           for(AgenteSaudeExecutaProcedimento av: vet){
+                System.out.println("competencia "+av.getAgente_saude_cpf());
+           }
+           mensagens=servivoProcedimento.sendExecutadosPorAgenteSaude(vet, user);
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
            
 
 //           Medico[] medi= servivoProcedimento.getMedicos(null, user);
