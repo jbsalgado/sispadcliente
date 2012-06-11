@@ -16,7 +16,7 @@ public class Competencia {
      * @return the mes
      */
     public String getMes() {
-        return mes;
+        return mes.length()==1?"0"+mes:mes;
     }
 
     /**

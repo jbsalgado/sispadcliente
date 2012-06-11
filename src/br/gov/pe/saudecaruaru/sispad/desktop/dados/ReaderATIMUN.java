@@ -171,7 +171,7 @@ public class ReaderATIMUN implements IReaderATIMUN{
                     }
                     //monta a tabela
                     query.append(" FROM "+ReaderATIMUN.getTableName()+competencia.getAnoDoisDigitos());
-                    query.append("  WHERE "+ReaderATIMUN.MES+"= ?");
+                    query.append("  WHERE "+ReaderATIMUN.MES+"=?");
                     //parametriza a consulta
                     PreparedStatement stmt= conec.prepareStatement(query.toString());
                     //setta os parâmetros
@@ -295,27 +295,28 @@ public class ReaderATIMUN implements IReaderATIMUN{
                     }
                     //monta a tabela
                     query.append(" FROM "+ReaderATIMUN.getTableName()+competencia.getAnoDoisDigitos());
-                    query.append("  WHERE "+ReaderATIMUN.MES+"= ?");
+                    query.append("  WHERE "+ReaderATIMUN.MES+"=?");
                     //parametriza a consulta
                     PreparedStatement stmt= conec.prepareStatement(query.toString());
                     //setta os parâmetros
                     stmt.setString(1, competencia.getMes());
+                    System.out.println(query.toString()+competencia.getMes());
                     //faz a consulta
                     ResultSet result=stmt.executeQuery();
                     int pos=0;
                     //cada registro equivale a 
                     while(result.next()){
-                        Odontologo enfer=this.getOdontologo(odontologo, result.getString(ReaderATIMUN.CODIGO_UNIDADE_CNES));
+                        Odontologo odon=this.getOdontologo(odontologo, result.getString(ReaderATIMUN.CODIGO_UNIDADE_CNES));
                         //existe um enfermeiro para a unidade, sennão vai pular para o próximo registro
-                        if(enfer!=null){
+                        if(odon!=null){
                             
                             //vai pegar todos os procedimento que devem se enviados por enfermeiro
                             for(Procedimento proce: procedimentos){
                                 //pega o enfermeiro da unidade
                                 OdontologoExecutaProcedimento odonExec= new  OdontologoExecutaProcedimento();
                                 odonExec.setCompetencia(competencia.toInt());
-                                odonExec.setOdontologo_cpf(enfer.getServidor_cpf());
-                                odonExec.setOdontologo_unidade_cnes(enfer.getUnidade_cnes());
+                                odonExec.setOdontologo_cpf(odon.getServidor_cpf());
+                                odonExec.setOdontologo_unidade_cnes(odon.getUnidade_cnes());
                                 odonExec.setProcedimento_codigo(proce.getCodigo());
                                 //pega o campo da tabela que corresponde ao procedimento
                                 odonExec.setQuantidade(result.getInt(this.getNameField(proce.getCodigo())));
