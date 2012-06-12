@@ -4,7 +4,6 @@
  */
 package br.gov.pe.saudecaruaru.sispad.desktop.dados;
 
-import br.gov.pe.saudecaruaru.sispad.desktop.gui.Home;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Medico;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MedicoExecutaProcedimento;
@@ -12,7 +11,6 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebSer
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Procedimento;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortType;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.ProcedimentoControllerPortTypeProxy;
-import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Unidade;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaude;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.AgenteSaudeExecutaProcedimento;
@@ -20,7 +18,6 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Enfermeiro;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.EnfermeiroExecutaProcedimento;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.Odontologo;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.OdontologoExecutaProcedimento;
-import java.rmi.RemoteException;
 import java.util.List;
 
 /**
