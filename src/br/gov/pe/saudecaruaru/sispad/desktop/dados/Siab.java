@@ -19,9 +19,11 @@ import java.util.List;
  */
 public class Siab implements ISistema,ISiab{
      IReaderATIMUN reader = null;
+     IReaderSAUMUN readerSaumun = null;
      UsuarioDesktop user=null;
     public Siab() {
         reader = new ReaderATIMUN();
+        readerSaumun = new ReaderSAUMUN();
         user = UsuarioDesktop.getInstance();
     }
    // private Competencia competencia;
@@ -33,8 +35,8 @@ public class Siab implements ISistema,ISiab{
         List<MessageWebService> listMensagens = new ArrayList<MessageWebService>();
         listMensagens.addAll(enviarProcedimentosMedico(competencia));
         listMensagens.addAll(enviarProcedimentosOdontologo(competencia));
-//        listMensagens.addAll(enviarProcedimentosEnfermeiro(competencia));
-//        listMensagens.addAll(enviarProcedimentosAgenteDeSaude( competencia));
+        listMensagens.addAll(enviarProcedimentosEnfermeiro(competencia));
+        listMensagens.addAll(enviarProcedimentosAgendeDeSaude(competencia));
        
         return listMensagens;
     }
@@ -172,7 +174,45 @@ public class Siab implements ISistema,ISiab{
 
     @Override
     public List<MessageWebService> enviarProcedimentosAgendeDeSaude(Competencia competencia) {
-        throw new UnsupportedOperationException("Not supported yet.");
+         MessageWebService[] mensagens = null;
+       
+
+        ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
+        
+        try {
+        
+//           MessageWebService[] mensagens2 =  servivoProcedimento.login(user);
+//            for(MessageWebService msg: mensagens2){ 
+//                System.out.println(msg.getMessage());
+//           }
+           //pega os procedimentos que devem ser enviados
+           
+           Procedimento[] pro=servivoProcedimento.getProcedimentosDeAgenteSaudeAEnviarSIAB(user);
+           AgenteSaude[] medi= servivoProcedimento.getAgenteSaude(null, user);
+           
+           for(Procedimento p:pro){
+               System.out.println(p.getCodigo());
+           }
+           
+           AgenteSaudeExecutaProcedimento[] array=readerSaumun.getProcedimentosExecutadoAgenteSaude(medi, competencia, pro);
+           
+           
+          
+           mensagens=servivoProcedimento.sendExecutadosPorAgenteSaude(array, user);
+         
+           for(MessageWebService msg: mensagens){ 
+                System.out.println(msg.getMessage());
+           }
+
+//           Medico[] medi= servivoProcedimento.getMedicos(null, user);
+//           for(Medico p: medi){
+//               
+//               System.out.println(p.getUnidade_cnes());
+//           }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(mensagens);
     }
     
     
