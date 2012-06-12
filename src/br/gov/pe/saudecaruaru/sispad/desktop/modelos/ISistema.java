@@ -5,6 +5,7 @@
 
 package br.gov.pe.saudecaruaru.sispad.desktop.modelos;
 
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
 import java.util.List;
 

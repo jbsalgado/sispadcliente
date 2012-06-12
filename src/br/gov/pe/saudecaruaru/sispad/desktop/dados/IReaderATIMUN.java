@@ -29,7 +29,7 @@ public interface IReaderATIMUN {
      * @param procedimentos
      * @return MedicoExecutaProcedimento
      */
-    public MedicoExecutaProcedimento[] getProcedimentosExecutadoMedico(Medico medico, Competencia competencia,  Procedimento[] procedimentos);
+    public MedicoExecutaProcedimento[] getProcedimentosExecutadoMedico(Medico medico, Competencia competencia, Unidade unidade, Procedimento[] procedimentos);
     
     /**
      * 
@@ -39,9 +39,9 @@ public interface IReaderATIMUN {
      * @param procedimentos
      * @return 
      */
-    public EnfermeiroExecutaProcedimento[] getProcedimentosExecutadoEnfermeiro(Enfermeiro enfermeiro, Competencia competencia, Procedimento[] procedimentos);
+    public EnfermeiroExecutaProcedimento[] getProcedimentosExecutadoEnfermeiro(Enfermeiro enfermeiro, Competencia competencia, Unidade unidade, Procedimento[] procedimentos);
     
-    public OdontologoExecutaProcedimento[] getProcedimentosExecutadoOdontologo(Odontologo odontologo, Competencia competencia,  Procedimento[] procedimentos);
+    public OdontologoExecutaProcedimento[] getProcedimentosExecutadoOdontologo(Odontologo odontologo, Competencia competencia, Unidade unidade, Procedimento[] procedimentos);
     
     public MedicoExecutaProcedimento[] getProcedimentosExecutadoMedico(Medico[] medico, Competencia competencia,  Procedimento[] procedimentos);
     
@@ -49,5 +49,6 @@ public interface IReaderATIMUN {
     
     public OdontologoExecutaProcedimento[] getProcedimentosExecutadoOdontologo(Odontologo[] odontologo, Competencia competencia, Procedimento[] procedimentos);
     
-    public String getNameField(String codigoProcedimento);
+    
+
 }

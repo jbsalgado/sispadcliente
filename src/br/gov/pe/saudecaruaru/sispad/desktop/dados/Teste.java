@@ -30,7 +30,7 @@ public class Teste {
          Competencia com= new Competencia();
          com.setAno("2012");
          com.setMes("02");
-        ReaderATIMUN reader= new ReaderATIMUN(com);
+        ReaderATIMUN reader= new ReaderATIMUN();
 //        Medico med= new Medico();
 //        med.setServidor_cpf("09886798805");
 //        med.setUnidade_cnes("2345676");
@@ -134,33 +134,33 @@ public class Teste {
         //r.teste();
     }
      
-     public void TesteAtimun(Competencia competencia){
-        ReaderATIMUN r= new ReaderATIMUN(competencia);
-        Medico med= new Medico();
-        med.setServidor_cpf("09886798805");
-        med.setUnidade_cnes("2345676");
-        List<MedicoExecutaProcedimento> lista= r.getAll(med);
-        int size=lista.size();
-        MedicoExecutaProcedimento[] array= new MedicoExecutaProcedimento[size];
-        
-        for(int i=0;i<size;i++){
-            array[i]=lista.get(i);
-        }
-        ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
-        
-        try {
-           UsuarioDesktop user=UsuarioDesktop.getInstance();
-           user.setToken("993eh2198e3yu2899");
-           user.setSerial_aplicacao("jndewhd936327");
-           user.setUsuario_sistema("cesar");
-           MessageWebService[] mensagens;
-           mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
-           for(MessageWebService msg: mensagens){ 
-                System.out.println(msg.getMessage());
-           }
-           System.out.println("terminou");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-     }
+//     public void TesteAtimun(Competencia competencia){
+//        ReaderATIMUN r= new ReaderATIMUN();
+//        Medico med= new Medico();
+//        med.setServidor_cpf("09886798805");
+//        med.setUnidade_cnes("2345676");
+//        List<MedicoExecutaProcedimento> lista= r.getAll(med);
+//        int size=lista.size();
+//        MedicoExecutaProcedimento[] array= new MedicoExecutaProcedimento[size];
+//        
+//        for(int i=0;i<size;i++){
+//            array[i]=lista.get(i);
+//        }
+//        ProcedimentoControllerPortType servivoProcedimento= new ProcedimentoControllerPortTypeProxy();
+//        
+//        try {
+//           UsuarioDesktop user=UsuarioDesktop.getInstance();
+//           user.setToken("993eh2198e3yu2899");
+//           user.setSerial_aplicacao("jndewhd936327");
+//           user.setUsuario_sistema("cesar");
+//           MessageWebService[] mensagens;
+//           mensagens=servivoProcedimento.sendExecutadosPorMedico(array, user);
+//           for(MessageWebService msg: mensagens){ 
+//                System.out.println(msg.getMessage());
+//           }
+//           System.out.println("terminou");
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//     }
 }
