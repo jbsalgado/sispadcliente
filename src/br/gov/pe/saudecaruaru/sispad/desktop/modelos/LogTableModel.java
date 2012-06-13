@@ -8,7 +8,7 @@ import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebSer
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import org.apache.commons.logging.impl.Log4JCategoryLog;
+
 
 /**
  *
@@ -52,6 +52,13 @@ public class LogTableModel extends AbstractTableModel{
     public String[] getColunas() {
         return colunas;
     }
+
+    @Override
+    public String getColumnName(int column) {
+        return colunas[column];
+    }
+    
+  
 
     /**
      * @param colunas the colunas to set

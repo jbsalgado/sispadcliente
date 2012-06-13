@@ -12,8 +12,6 @@ import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.RetificarMessagesWebService;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -34,7 +32,6 @@ public class Home extends javax.swing.JFrame implements IHome{
     public Home(Envio envio) {
         initComponents();
        
-       
         this.envioController = new EnvioController(envio,this);
         this.usuarioDesktopController =new UsuarioDesktopController(this);
       
@@ -42,16 +39,6 @@ public class Home extends javax.swing.JFrame implements IHome{
         this.usuarioDesktopController.login();       
        
     }
-    
-    /** 
- *Centraliza o Frame na tela 
- *@return   Posição na tela 
- *@param   windth   Largura do Frame 
- *@param   height   Altura do Frame 
- *@see   java.awt.Frame 
- *@see   javax.swing.JFrame 
- */  
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,7 +48,7 @@ public class Home extends javax.swing.JFrame implements IHome{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-		
+
         fileChooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxSistema = new javax.swing.JComboBox();
