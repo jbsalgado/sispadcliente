@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 
 /**
  *
@@ -26,7 +24,7 @@ public class Log extends javax.swing.JFrame {
     public Log(List<MessageWebService> dados) {
         this.dados=dados; 
         initComponents();
-        createJTable();
+        
       
         
     }
@@ -34,7 +32,7 @@ public class Log extends javax.swing.JFrame {
     public JTable createJTable() {  
   
      
-    String[] colunas = new String[]{"Tipo", "Mensagem","Codigo"};  
+    String[] colunas = new String[] { "Tipo", "Mensagem","Codigo" };  
   
     // Alimenta as linhas de dados  
 //    dados.add(new MessageWebService("1", "SUCESSO", "3"));  
@@ -51,16 +49,7 @@ public class Log extends javax.swing.JFrame {
     LogTableModel modelo = new LogTableModel(this.dados, colunas,edicao);  
     this.jTableLog = new JTable(modelo);  
     this.jTableLog.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  
-     TableColumn column0;
-     TableColumn column1;
-     TableColumn column2;
-     jTableLog.setRowHeight(30);
-     column0=this.jTableLog.getColumnModel().getColumn(0);
-     column0.setPreferredWidth(10);
-     column1=this.jTableLog.getColumnModel().getColumn(1);
-     column1.setPreferredWidth(900);
-     column2=this.jTableLog.getColumnModel().getColumn(2);
-     column2.setPreferredWidth(10);
+  
     return this.jTableLog;  
   
 }  
@@ -75,7 +64,21 @@ public class Log extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableLog = createJTable();
+        jTableLog = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableLog.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
         jScrollPane1.setViewportView(jTableLog);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -84,14 +87,14 @@ public class Log extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

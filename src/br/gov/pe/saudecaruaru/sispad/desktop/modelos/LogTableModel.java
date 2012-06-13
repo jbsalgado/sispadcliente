@@ -6,24 +6,28 @@ package br.gov.pe.saudecaruaru.sispad.desktop.modelos;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import org.apache.commons.logging.impl.Log4JCategoryLog;
 
 /**
  *
  * @author Junior Pires
  */
 public class LogTableModel extends AbstractTableModel{
-    private ArrayList linhas;
-    private String[] colunas;
+    private List linhas = null;
+    private String[] colunas = null;
     private boolean [] colsEdicao;
-    private String[] valores;
-    private MessageWebService message=new MessageWebService();
+    private static final String ERRO = "ERRO";
+    private static final String PERIGO = "PERIGO";
+    private static final String SUCESSO = "SUCESSO";
 
-    public LogTableModel(ArrayList linhas, String[] colunas, boolean[] colsEdicao) {
+    public LogTableModel(List linhas, String[] colunas, boolean[] colsEdicao) {
         this.linhas = linhas;
         this.colunas = colunas;
         this.colsEdicao = colsEdicao;
-        valores=new String[]{message.getTipo(),message.getMessage(),message.getCodigo()}; 
+        
+        
     }
     
     
@@ -31,7 +35,7 @@ public class LogTableModel extends AbstractTableModel{
     /**
      * @return the linhas
      */
-    public ArrayList getLinhas() {
+    public List getLinhas() {
         return linhas;
     }
 
@@ -68,8 +72,9 @@ public class LogTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-       message =  (MessageWebService) getLinhas().get(rowIndex);
-       return valores[columnIndex];
+       MessageWebService linha =  (MessageWebService) getLinhas().get(rowIndex);
+      
+       return linha.getValueAtIndex(columnIndex);
     }
     
     @Override
@@ -79,10 +84,11 @@ public class LogTableModel extends AbstractTableModel{
     
     @Override
     public void setValueAt(Object value, int row, int col){  
-        // Obtem a linha, que é uma String []  
-        message =  (MessageWebService) getLinhas().get(row); 
-        // Altera o conteudo no indice da coluna passado  
-        valores[col] = (String)value;  
+        // Obtem a linha
+        MessageWebService linha=  (MessageWebService) getLinhas().get(row); 
+        // Altera o conteudo no indice da coluna passado 
+       
+        linha.setValueAtIndex(col,(String)value);  
         // dispara o evento de celula alterada  
         fireTableCellUpdated(row,col);  
 } 

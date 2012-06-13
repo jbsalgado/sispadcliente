@@ -206,7 +206,9 @@ public class Home extends javax.swing.JFrame implements IHome{
       if(listMensagens==null){
         JOptionPane.showMessageDialog(null,"Arquivo deve ser do tipo ZIP", null, JOptionPane.ERROR_MESSAGE);
       }else{
-          JOptionPane.showMessageDialog(null,retificador.toString(), null, JOptionPane.INFORMATION_MESSAGE);
+          Log log = new Log(listMensagens);
+          log.setVisible(true);
+          //JOptionPane.showMessageDialog(null,retificador.toString(), null, JOptionPane.INFORMATION_MESSAGE);
       }
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 

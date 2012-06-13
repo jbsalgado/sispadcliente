@@ -26,6 +26,23 @@ public class MessageWebService  implements java.io.Serializable {
            this.tipo = tipo;
     }
 
+    public String getValueAtIndex(int id){
+        switch (id) {
+            case 0: return this.getTipo();
+            case 1: return this.getMessage();
+            case 2: return this.getCodigo();
+        }
+        return null;
+    }
+    
+    public void setValueAtIndex(int id,String value){
+        switch (id) {
+            case 0: this.setTipo(value);
+            case 1: this.setMessage(value);
+            case 2: this.setCodigo(value);
+        }
+
+    }
 
     /**
      * Gets the codigo value for this MessageWebService.
