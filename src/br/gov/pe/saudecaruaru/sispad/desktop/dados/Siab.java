@@ -33,8 +33,8 @@ public class Siab implements ISistema,ISiab{
     @Override
     public List<MessageWebService> lerEnviarDados(Competencia competencia) {
         List<MessageWebService> listMensagens = new ArrayList<MessageWebService>();
-//        listMensagens.addAll(enviarProcedimentosMedico(competencia));
-//        listMensagens.addAll(enviarProcedimentosOdontologo(competencia));
+        listMensagens.addAll(enviarProcedimentosMedico(competencia));
+        listMensagens.addAll(enviarProcedimentosOdontologo(competencia));
         listMensagens.addAll(enviarProcedimentosEnfermeiro(competencia));
         listMensagens.addAll(enviarProcedimentosAgendeDeSaude(competencia));
        
