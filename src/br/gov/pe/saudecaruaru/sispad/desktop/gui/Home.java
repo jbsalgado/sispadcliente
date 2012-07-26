@@ -61,7 +61,7 @@ public class Home extends javax.swing.JFrame implements IHome{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-		
+
         fileChooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxSistema = new javax.swing.JComboBox();
@@ -74,6 +74,8 @@ public class Home extends javax.swing.JFrame implements IHome{
         jComboBoxAno = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
         jLabelLogado = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea_log = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -83,7 +85,7 @@ public class Home extends javax.swing.JFrame implements IHome{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
         jLabel1.setText("Sistema: ");
 
         jComboBoxSistema.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SIAB", "SIA", " " }));
@@ -98,7 +100,7 @@ public class Home extends javax.swing.JFrame implements IHome{
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18));
         jLabel3.setText("Competência(mês/ano): ");
 
         jButtonEnviar.setText("Enviar");
@@ -117,6 +119,12 @@ public class Home extends javax.swing.JFrame implements IHome{
         jLabelLogado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png"))); // NOI18N
         jLabelLogado.setText("OFF");
         jToolBar1.add(jLabelLogado);
+
+        jTextArea_log.setColumns(20);
+        jTextArea_log.setEditable(false);
+        jTextArea_log.setRows(5);
+        jTextArea_log.setName(""); // NOI18N
+        jScrollPane1.setViewportView(jTextArea_log);
 
         jMenu1.setText("Usuário");
 
@@ -140,7 +148,7 @@ public class Home extends javax.swing.JFrame implements IHome{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonEnviar)
                     .addGroup(layout.createSequentialGroup()
@@ -160,13 +168,18 @@ public class Home extends javax.swing.JFrame implements IHome{
                                     .addComponent(jTextFieldArq, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonEscolher)))))
-                .addContainerGap(116, Short.MAX_VALUE))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(139, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jComboBoxSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -183,8 +196,9 @@ public class Home extends javax.swing.JFrame implements IHome{
                     .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,12 +230,16 @@ public class Home extends javax.swing.JFrame implements IHome{
       envio.setSistema(sistema);
       List<MessageWebService> listMensagens = null;
       listMensagens= envioController.EnviarDados(envio);
+       this.jTextArea_log.setText("");
+      for(MessageWebService m: listMensagens){
+          this.jTextArea_log.append(m.getMessage());
+      }
       RetificarMessagesWebService retificador = new RetificarMessagesWebService(listMensagens); 
       if(listMensagens==null){
         JOptionPane.showMessageDialog(null,"Arquivo deve ser do tipo ZIP", null, JOptionPane.ERROR_MESSAGE);
       }else{
-          Log log = new Log(listMensagens);
-          log.setVisible(true);
+//          Log log = new Log(listMensagens);
+//          log.setVisible(true);
           //JOptionPane.showMessageDialog(null,retificador.toString(), null, JOptionPane.INFORMATION_MESSAGE);
       }
     }//GEN-LAST:event_jButtonEnviarActionPerformed
@@ -320,6 +338,8 @@ public class Home extends javax.swing.JFrame implements IHome{
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea_log;
     private javax.swing.JTextField jTextFieldArq;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

@@ -52,7 +52,7 @@ public class UsuarioDesktopDao {
     e.printStackTrace();
     }finally{
             try {
-                conn.close();
+                if(conn!=null) conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(UsuarioDesktopDao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -69,7 +69,7 @@ public class UsuarioDesktopDao {
     e.printStackTrace();
     }finally{
             try {
-                conn.close();
+                if(conn!=null) conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(UsuarioDesktopDao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -90,7 +90,7 @@ public class UsuarioDesktopDao {
     e.printStackTrace();
     }finally{
             try {
-                conn.close();
+                if(conn!=null)  conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(UsuarioDesktopDao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -107,27 +107,31 @@ public class UsuarioDesktopDao {
     
     UsuarioDesktop usuarioDesktop = null;
     Connection conn = null;
-    try {
-     conn = ConnectionFactorySQLite.getConnection();
-    Statement stm = conn.createStatement();
-    rs = stm.executeQuery("SELECT * FROM usuario_desktop WHERE id='"+UsuarioDesktopDao.id+"'");
-    if(rs.next()){
+//    try {
+//     conn = ConnectionFactorySQLite.getConnection();
+//    Statement stm = conn.createStatement();
+//    rs = stm.executeQuery("SELECT * FROM usuario_desktop WHERE id='"+UsuarioDesktopDao.id+"'");
+//    if(rs.next()){
+        //System.out.println("achou um objeto!");
         usuarioDesktop = UsuarioDesktop.getInstance();
-        usuarioDesktop.setServidor_cpf(rs.getString("servidor_cpf"));
-        usuarioDesktop.setToken(rs.getString("token"));
-        usuarioDesktop.setUsuario_sistema(rs.getString("usuario_sistema"));
-        usuarioDesktop.setSerial_aplicacao(rs.getString("serial_aplicacao"));         
-    }
-    rs.close();
-    } catch (SQLException e) {
-    e.printStackTrace();
-    }finally{
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDesktopDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }
-  
+//        usuarioDesktop.setServidor_cpf(rs.getString("servidor_cpf"));
+//        usuarioDesktop.setToken(rs.getString("token"));
+//        usuarioDesktop.setUsuario_sistema(rs.getString("usuario_sistema"));
+//        usuarioDesktop.setSerial_aplicacao(rs.getString("serial_aplicacao")); 
+           usuarioDesktop.setServidor_cpf("09809809809");
+           usuarioDesktop.setToken("c425a748fe7269fa6c4202a77569df66b3609026");
+           usuarioDesktop.setSerial_aplicacao("0987890");
+           usuarioDesktop.setUsuario_sistema("cesar");
+//    }
+//    } catch (SQLException e) {
+//    e.printStackTrace();
+//    }finally{
+//            try {
+//                if(conn!=null) conn.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(UsuarioDesktopDao.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//    }
+//  
     }
 }
