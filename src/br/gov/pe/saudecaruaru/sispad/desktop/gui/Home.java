@@ -29,20 +29,24 @@ public class Home extends javax.swing.JFrame implements IHome{
     /**
      * Creates new form Home
      */
-    IEnvioController envioController = null;
-    IUsuarioDesktopController usuarioDesktopController = null;
+    private IEnvioController envioController = null;
+    private IUsuarioDesktopController usuarioDesktopController = null;
+    private DadosUsuario dadosUsuario = null;
     public Home(Envio envio) {
         initComponents();
        
        
         this.envioController = new EnvioController(envio,this);
         this.usuarioDesktopController =new UsuarioDesktopController(this);
-      
+        dadosUsuario = new DadosUsuario(this.usuarioDesktopController);
         //inicializa o usuario
-        this.usuarioDesktopController.login();       
+        //this.usuarioDesktopController.login();       
        
     }
-    
+     public void exibeTelaLogin(){
+       
+       dadosUsuario.setVisible(true);
+    }
     /** 
  *Centraliza o Frame na tela 
  *@return   Posição na tela 
@@ -87,7 +91,7 @@ public class Home extends javax.swing.JFrame implements IHome{
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
         jLabel1.setText("Sistema: ");
-
+		jTextFieldArq.setEnabled(false);
         jComboBoxSistema.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SIAB", "SIA", " " }));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -116,7 +120,7 @@ public class Home extends javax.swing.JFrame implements IHome{
 
         jToolBar1.setRollover(true);
 
-        jLabelLogado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png"))); // NOI18N
+        //jLabelLogado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png"))); // NOI18N
         jLabelLogado.setText("OFF");
         jToolBar1.add(jLabelLogado);
 
@@ -219,6 +223,7 @@ public class Home extends javax.swing.JFrame implements IHome{
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
       File file = fileChooser.getSelectedFile();
+      if(file!=null){
       String sistema = jComboBoxSistema.getSelectedItem().toString();
       String mesCompetencia = jComboBoxMes.getSelectedItem().toString();
       String anoCompetencia = jComboBoxAno.getSelectedItem().toString();
@@ -242,11 +247,13 @@ public class Home extends javax.swing.JFrame implements IHome{
 //          log.setVisible(true);
           //JOptionPane.showMessageDialog(null,retificador.toString(), null, JOptionPane.INFORMATION_MESSAGE);
       }
+     }else{
+             JOptionPane.showMessageDialog(null,"O campo arquivo não pode estar vazio", null, JOptionPane.ERROR_MESSAGE);
+        } 
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       DadosUsuario dadosUsuario = new DadosUsuario(this.usuarioDesktopController);
-       dadosUsuario.setVisible(true);
+       exibeTelaLogin();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     @Override

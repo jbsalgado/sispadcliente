@@ -23,6 +23,8 @@ public class Main {
 //        
         Home home = new Home(envio);
         home.setVisible(true);
+        
+        home.exibeTelaLogin();
         //IEnvioController envioController = new EnvioController(envio);
     }
 }
