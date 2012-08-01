@@ -8,6 +8,7 @@ package br.gov.pe.saudecaruaru.sispad.desktop.dados;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.ISistema;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.UsuarioDesktop;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Competencia;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.MenssagensWebService;
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,27 +19,83 @@ import java.util.List;
  * @author Junior Pires
  */
 public class Siab implements ISistema,ISiab{
-     IReaderATIMUN reader = null;
-     IReaderSAUMUN readerSaumun = null;
-     UsuarioDesktop user=null;
-    public Siab() {
+    
+    
+     private IReaderATIMUN reader = null;
+     private IReaderSAUMUN readerSaumun = null;
+     private UsuarioDesktop user=null;
+     private Competencia competencia=null;
+     private MenssagensWebService mensagensWeb=null;
+     
+     
+     
+    public Siab(MenssagensWebService mensagensWeb) {
         reader = new ReaderATIMUN();
         readerSaumun = new ReaderSAUMUN();
         user = UsuarioDesktop.getInstance();
+        this.mensagensWeb=mensagensWeb;
     }
    // private Competencia competencia;
     
     
 
     @Override
-    public List<MessageWebService> lerEnviarDados(Competencia competencia) {
-        List<MessageWebService> listMensagens = new ArrayList<MessageWebService>();
-        listMensagens.addAll(enviarProcedimentosMedico(competencia));
-        listMensagens.addAll(enviarProcedimentosOdontologo(competencia));
-        listMensagens.addAll(enviarProcedimentosEnfermeiro(competencia));
-        listMensagens.addAll(enviarProcedimentosAgendeDeSaude(competencia));
+    public void lerEnviarDados(Competencia competencia) {
+        this.competencia=competencia;
+        Thread[] threads=new Thread[4];
+        
+        threads[0]= new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Siab.this.mensagensWeb.addMensagens(enviarProcedimentosMedico(Siab.this.competencia));
+            }
+        });
+        
+        threads[1]= new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Siab.this.mensagensWeb.addMensagens(enviarProcedimentosOdontologo(Siab.this.competencia));
+            }
+        });
+        
+        threads[2]= new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Siab.this.mensagensWeb.addMensagens(enviarProcedimentosEnfermeiro(Siab.this.competencia));
+            }
+        });
+        
+        
+       threads[3]= new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Siab.this.mensagensWeb.addMensagens(enviarProcedimentosAgendeDeSaude(Siab.this.competencia));
+            }
+        });
+       System.out.println("antwes do for");
+       for(Thread t: threads){
+           System.out.println("cesar");
+           t.start();
+       }
+//        MessageWebService m = new MessageWebService();
+//        m.setMessage("Funcionou\n");
+//        ArrayList<MessageWebService> array = new ArrayList<MessageWebService>();
+//        array.add(m);
+//        array.add(m);
+//        array.add(m);
+//        array.add(m);
+//        array.add(m);
+//        array.add(m);
+//        array.add(m);
+              
+//        System.out.printf("Chegou");
+//         mensagensWeb.addMensagens(array);
        
-        return listMensagens;
+    
     }
 
     @Override

@@ -13,10 +13,10 @@ import br.gov.pe.saudecaruaru.sispad.desktop.dados.Siab;
  */
 public class FactoryEnvioSistema {
     
-    public static ISistema obterFactory(String nomeSistema){
+    public static ISistema obterFactory(String nomeSistema,MenssagensWebService mensagensWeb){
         ISistema sistema=null;
         if(nomeSistema.equals("SIAB")){
-            sistema = new Siab();
+            sistema = new Siab( mensagensWeb);
         }
 
         return sistema;

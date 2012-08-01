@@ -8,33 +8,43 @@ import br.gov.pe.saudecaruaru.sispad.desktop.controllers.EnvioController;
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IEnvioController;
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IUsuarioDesktopController;
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.UsuarioDesktopController;
-import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
-import br.gov.pe.saudecaruaru.sispad.desktop.modelos.RetificarMessagesWebService;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.*;
 
 import br.gov.pe.saudecaruaru.sispad.desktop.servicos.procedimento.MessageWebService;
+import java.awt.EventQueue;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  *
  * @author Junior Pires
  */
-public class Home extends javax.swing.JFrame implements IHome{
+public class Home extends javax.swing.JFrame implements IHome,Observer{
 
     /**
      * Creates new form Home
      */
+    // Formatador da hora  
+    private static final DateFormat FORMATO = new SimpleDateFormat("HH:mm:ss");  
     private IEnvioController envioController = null;
     private IUsuarioDesktopController usuarioDesktopController = null;
     private DadosUsuario dadosUsuario = null;
+    private int valueProgressBar;
     public Home(Envio envio) {
+        
         initComponents();
-       
+        initMyComponents();
        
         this.envioController = new EnvioController(envio,this);
         this.usuarioDesktopController =new UsuarioDesktopController(this);
@@ -43,10 +53,17 @@ public class Home extends javax.swing.JFrame implements IHome{
         //this.usuarioDesktopController.login();       
        
     }
+    
+    private void initMyComponents(){
+        jTextFieldArq.setEnabled(false);
+        this.jProgressBar1.setValue(0);
+       
+    }
      public void exibeTelaLogin(){
        
        dadosUsuario.setVisible(true);
     }
+   
     /** 
  *Centraliza o Frame na tela 
  *@return   Posição na tela 
@@ -80,6 +97,7 @@ public class Home extends javax.swing.JFrame implements IHome{
         jLabelLogado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_log = new javax.swing.JTextArea();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -89,9 +107,9 @@ public class Home extends javax.swing.JFrame implements IHome{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Sistema: ");
-		jTextFieldArq.setEnabled(false);
+
         jComboBoxSistema.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SIAB", "SIA", " " }));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -104,7 +122,7 @@ public class Home extends javax.swing.JFrame implements IHome{
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Competência(mês/ano): ");
 
         jButtonEnviar.setText("Enviar");
@@ -120,7 +138,7 @@ public class Home extends javax.swing.JFrame implements IHome{
 
         jToolBar1.setRollover(true);
 
-        //jLabelLogado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png"))); // NOI18N
+        jLabelLogado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/gov/pe/saudecaruaru/sispad/desktop/images/power_off.png"))); // NOI18N
         jLabelLogado.setText("OFF");
         jToolBar1.add(jLabelLogado);
 
@@ -151,32 +169,37 @@ public class Home extends javax.swing.JFrame implements IHome{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonEnviar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBoxSistema, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldArq, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonEscolher)))))
-                .addContainerGap(139, Short.MAX_VALUE))
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonEnviar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jComboBoxSistema, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldArq, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonEscolher)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -202,7 +225,9 @@ public class Home extends javax.swing.JFrame implements IHome{
                 .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,33 +245,40 @@ public class Home extends javax.swing.JFrame implements IHome{
         System.out.println("File access cancelled by user.");
     }
     }//GEN-LAST:event_jButtonEscolherActionPerformed
-
+    public void limparCamposLog(){
+        this.jTextArea_log.setText("");
+        this.jProgressBar1.setValue(0);
+        this.valueProgressBar=0;
+    }
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
+      
+      
       File file = fileChooser.getSelectedFile();
       if(file!=null){
       String sistema = jComboBoxSistema.getSelectedItem().toString();
       String mesCompetencia = jComboBoxMes.getSelectedItem().toString();
       String anoCompetencia = jComboBoxAno.getSelectedItem().toString();
-      Envio envio = new Envio();
+      Envio envio = new Envio(null);
       
       envio.setArquivo(file);
       envio.setmesCompetencia(mesCompetencia);
       envio.setAnoCompetencia(anoCompetencia);
       envio.setSistema(sistema);
-      List<MessageWebService> listMensagens = null;
-      listMensagens= envioController.EnviarDados(envio);
-       this.jTextArea_log.setText("");
-      for(MessageWebService m: listMensagens){
-          this.jTextArea_log.append(m.getMessage());
-      }
-      RetificarMessagesWebService retificador = new RetificarMessagesWebService(listMensagens); 
-      if(listMensagens==null){
+//      List<MessageWebService> listMensagens = null;
+//      listMensagens= envioController.EnviarDados(envio);
+//       this.jTextArea_log.setText("");
+//      for(MessageWebService m: listMensagens){
+//          this.jTextArea_log.append(m.getMessage());
+//      }
+      //RetificarMessagesWebService retificador = new RetificarMessagesWebService(listMensagens); 
+      if(!envioController.EnviarDados(envio)){
         JOptionPane.showMessageDialog(null,"Arquivo deve ser do tipo ZIP", null, JOptionPane.ERROR_MESSAGE);
-      }else{
+      }
+//      else{
 //          Log log = new Log(listMensagens);
 //          log.setVisible(true);
           //JOptionPane.showMessageDialog(null,retificador.toString(), null, JOptionPane.INFORMATION_MESSAGE);
-      }
+     // }
      }else{
              JOptionPane.showMessageDialog(null,"O campo arquivo não pode estar vazio", null, JOptionPane.ERROR_MESSAGE);
         } 
@@ -345,9 +377,32 @@ public class Home extends javax.swing.JFrame implements IHome{
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea_log;
     private javax.swing.JTextField jTextFieldArq;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
+    
+    @Override
+    public void update(Subject sub, Object arg) {
+        
+        if(sub instanceof MenssagensWebService){
+           MenssagensWebService mensagens = (MenssagensWebService) sub;
+           for(MessageWebService mensagem : mensagens.getLastMessages()){
+                  jTextArea_log.append(mensagem.getMessage());
+           
+               
+           }
+         
+           valueProgressBar=valueProgressBar+25;
+           jProgressBar1.setValue(valueProgressBar);
+           jProgressBar1.setStringPainted(true);
+           
+        }
+
+    }
+           
+         
+      
 }

@@ -10,6 +10,7 @@ import br.gov.pe.saudecaruaru.sispad.desktop.controllers.IUsuarioDesktopControll
 import br.gov.pe.saudecaruaru.sispad.desktop.controllers.UsuarioDesktopController;
 import br.gov.pe.saudecaruaru.sispad.desktop.gui.Home;
 import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
+import br.gov.pe.saudecaruaru.sispad.desktop.modelos.MenssagensWebService;
 
 /**
  *
@@ -17,14 +18,20 @@ import br.gov.pe.saudecaruaru.sispad.desktop.modelos.Envio;
  */
 public class Main {
     public static void main(String[] argv){
-        Envio envio = new Envio();
+        MenssagensWebService mensagensWeb = new MenssagensWebService();
+        Envio envio = new Envio(mensagensWeb);
 //        EnvioController envioController = new EnvioController(envio);
 //        IUsuarioDesktopController usuarioDesktopController = new UsuarioDesktopController();
 //        
         Home home = new Home(envio);
+        //registrando a home como um observador das mensagens web
+        mensagensWeb.registerObserver(home);
         home.setVisible(true);
-        
+        //thread Log
+        //home.thread();
         home.exibeTelaLogin();
         //IEnvioController envioController = new EnvioController(envio);
     }
+    
+    
 }

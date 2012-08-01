@@ -20,9 +20,11 @@ public class Envio {
     private String sistema;
     private File arquivo;
     private Competencia competencia;
+    private MenssagensWebService mensagensWeb;
 
-    public Envio() {
+    public Envio(MenssagensWebService mensagensWeb) {
         this.competencia = new Competencia();
+        this.mensagensWeb = mensagensWeb;
     }
 
     /**
@@ -164,6 +166,18 @@ public class Envio {
              return true;
         }
         return false;
+    }
+
+    /**
+     * @param mensagensWeb the mensagensWeb to set
+     */
+    
+
+    /**
+     * @return the mensagensWeb
+     */
+    public MenssagensWebService getMensagensWeb() {
+        return mensagensWeb;
     }
 
     /**

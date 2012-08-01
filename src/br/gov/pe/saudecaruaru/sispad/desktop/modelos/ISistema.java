@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface ISistema {
 
-    public List<MessageWebService> lerEnviarDados(Competencia competencia);
+    public void lerEnviarDados(Competencia competencia);
 
 }

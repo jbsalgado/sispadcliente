@@ -13,7 +13,7 @@ import java.util.List;
  * @author Junior Pires
  */
 public interface IEnvioController {
-    public List<MessageWebService> EnviarDados(Envio envio);
+    public boolean EnviarDados(Envio envio);
    
     
     

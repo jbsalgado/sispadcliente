@@ -34,27 +34,30 @@ public class EnvioController implements IEnvioController{
     
     //obtem os dados do modelo Envio, extrai os arquivos e ler e envia os dados
     @Override
-    public List<MessageWebService> EnviarDados(Envio envio){
-      
+    public boolean EnviarDados(Envio envio){
+        //limpa os campos de log da GUI
+        home.limparCamposLog();
+        
+        
         this.envio.setArquivo(envio.getArquivo());
         this.envio.setmesCompetencia(envio.getMesCompetencia());
         this.envio.setAnoCompetencia(envio.getAnoCompetencia());
         this.envio.setSistema(envio.getSistema());
         
-        if(this.envio.extrairArquivo())
-            return lerEnviarDados();
+        if(this.envio.extrairArquivo()){
+             lerEnviarDados();
+             return true;
                 //Configuracao.limpaDiretorioTemp();
-              
+        }     
             
-        return null;
+        return false;
     }
    
     //obtem o sistema a partir da fabrica e chama o metodo de leitura e envio de dados
-    public List<MessageWebService> lerEnviarDados() {
+    public void lerEnviarDados() {
         ISistema sistema;
-        sistema = FactoryEnvioSistema.obterFactory(this.envio.getSistema());
-        
-        return sistema.lerEnviarDados(this.envio.getCompetencia());
+        sistema = FactoryEnvioSistema.obterFactory(this.envio.getSistema(),envio.getMensagensWeb());
+        sistema.lerEnviarDados(this.envio.getCompetencia());
         
        
     }
